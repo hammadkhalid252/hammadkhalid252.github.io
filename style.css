@@ -1190,3 +1190,6 @@ p {
         transition-duration: 0.01ms !important;
     }
 }
+.preloader {
+    display: none !important;
+}
