@@ -1,101 +1,167 @@
 
 /* =========================================
-   HAMMAD KHALID - PORTFOLIO JAVASCRIPT
+   HAMMAD KHALID — PORTFOLIO JAVASCRIPT
    Three.js + GSAP + ScrollTrigger
 ========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    /* =====================================
-       1. PRELOADER
-    ===================================== */
+    /* -------------------------------------
+       1. FOOTER CURRENT YEAR
+    ------------------------------------- */
 
-    const preloader = document.querySelector(".preloader");
-
-    window.addEventListener("load", () => {
-        if (preloader) {
-            if (window.gsap) {
-                gsap.to(preloader, {
-                    opacity: 0,
-                    duration: 0.7,
-                    delay: 0.3,
-                    onComplete: () => {
-                        preloader.style.display = "none";
-                    }
-                });
-            } else {
-                preloader.style.display = "none";
-            }
-        }
-    });
-
-
-    /* =====================================
-       2. CURRENT YEAR
-    ===================================== */
-
-    const yearElement = document.getElementById("currentYear");
+    const yearElement = document.getElementById("current-year");
 
     if (yearElement) {
         yearElement.textContent = new Date().getFullYear();
     }
 
 
-    /* =====================================
-       3. MOBILE NAVIGATION
-    ===================================== */
+    /* -------------------------------------
+       2. MOBILE NAVIGATION
+    ------------------------------------- */
 
     const menuToggle = document.querySelector(".menu-toggle");
-    const navbar = document.querySelector(".navbar");
+    const navLinks = document.querySelector(".nav-links");
+    const navItems = document.querySelectorAll(".nav-links a");
 
-    if (menuToggle && navbar) {
+    if (menuToggle && navLinks) {
 
         menuToggle.addEventListener("click", () => {
-            navbar.classList.toggle("active");
 
-            const isOpen = navbar.classList.contains("active");
+            navLinks.classList.toggle("active");
 
-            menuToggle.setAttribute("aria-expanded", isOpen);
-            menuToggle.setAttribute(
-                "aria-label",
-                isOpen ? "Close menu" : "Open menu"
-            );
+            const icon = menuToggle.querySelector("i");
+
+            if (icon) {
+                icon.classList.toggle("fa-bars");
+                icon.classList.toggle("fa-xmark");
+            }
+
         });
 
-        navbar.querySelectorAll("a").forEach(link => {
+        navItems.forEach(link => {
+
             link.addEventListener("click", () => {
-                navbar.classList.remove("active");
-                menuToggle.setAttribute("aria-expanded", "false");
-                menuToggle.setAttribute("aria-label", "Open menu");
+
+                navLinks.classList.remove("active");
+
+                const icon = menuToggle.querySelector("i");
+
+                if (icon) {
+                    icon.classList.add("fa-bars");
+                    icon.classList.remove("fa-xmark");
+                }
+
             });
+
         });
 
         document.addEventListener("click", event => {
+
             if (
-                !navbar.contains(event.target) &&
+                !navLinks.contains(event.target) &&
                 !menuToggle.contains(event.target)
             ) {
-                navbar.classList.remove("active");
-                menuToggle.setAttribute("aria-expanded", "false");
+                navLinks.classList.remove("active");
+
+                const icon = menuToggle.querySelector("i");
+
+                if (icon) {
+                    icon.classList.add("fa-bars");
+                    icon.classList.remove("fa-xmark");
+                }
             }
+
         });
+
     }
 
 
-    /* =====================================
-       4. GSAP SETUP
-    ===================================== */
+    /* -------------------------------------
+       3. ACTIVE NAVIGATION ON SCROLL
+    ------------------------------------- */
 
-    const hasGSAP = typeof window.gsap !== "undefined";
+    const sections = document.querySelectorAll("main section[id]");
 
-    if (hasGSAP) {
+    function updateActiveNavigation() {
+
+        let currentSection = "";
+
+        sections.forEach(section => {
+
+            const sectionTop = section.offsetTop - 150;
+            const sectionBottom = sectionTop + section.offsetHeight;
+
+            if (
+                window.scrollY >= sectionTop &&
+                window.scrollY < sectionBottom
+            ) {
+                currentSection = section.getAttribute("id");
+            }
+
+        });
+
+        navItems.forEach(link => {
+
+            link.classList.remove("active");
+
+            if (link.getAttribute("href") === `#${currentSection}`) {
+                link.classList.add("active");
+            }
+
+        });
+
+    }
+
+    window.addEventListener("scroll", updateActiveNavigation, {
+        passive: true
+    });
+
+    updateActiveNavigation();
+
+
+    /* -------------------------------------
+       4. SMOOTH SCROLL
+    ------------------------------------- */
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+        anchor.addEventListener("click", event => {
+
+            const targetId = anchor.getAttribute("href");
+
+            if (!targetId || targetId === "#") return;
+
+            const target = document.querySelector(targetId);
+
+            if (target) {
+
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+
+            }
+
+        });
+
+    });
+
+
+    /* -------------------------------------
+       5. GSAP ANIMATIONS
+    ------------------------------------- */
+
+    if (window.gsap) {
 
         if (window.ScrollTrigger) {
             gsap.registerPlugin(ScrollTrigger);
         }
 
-        /* HERO ANIMATION */
-
+        // Hero entrance animation
         const heroTimeline = gsap.timeline({
             defaults: {
                 ease: "power3.out"
@@ -108,107 +174,88 @@ document.addEventListener("DOMContentLoaded", () => {
                 y: 20,
                 duration: 0.7
             })
-            .from(".hero-subtitle", {
+            .from(".hero-intro", {
                 opacity: 0,
                 y: 20,
                 duration: 0.6
             }, "-=0.4")
-            .from(".hero-content h1", {
+            .from(".hero h1", {
                 opacity: 0,
-                y: 50,
-                duration: 1
+                y: 40,
+                duration: 0.9
             }, "-=0.3")
             .from(".hero-description", {
                 opacity: 0,
-                y: 25,
+                y: 20,
                 duration: 0.7
             }, "-=0.5")
-            .from(".hero-buttons a", {
+            .from(".hero-buttons .btn", {
                 opacity: 0,
                 y: 20,
                 stagger: 0.15,
                 duration: 0.6
             }, "-=0.4")
-            .from(".hero-information > div", {
+            .from(".hero-socials a", {
                 opacity: 0,
-                y: 20,
-                stagger: 0.15,
-                duration: 0.6
-            }, "-=0.3");
-
-
-        /* SCROLL REVEAL */
-
-        const revealElements = document.querySelectorAll(
-            ".section-label, .about-grid, .section-top, " +
-            ".service-card, .project-card, .why-card, .final-cta"
-        );
-
-        revealElements.forEach(element => {
-
-            gsap.from(element, {
+                scale: 0.5,
+                stagger: 0.1,
+                duration: 0.5
+            }, "-=0.3")
+            .from(".hero-visual", {
                 opacity: 0,
-                y: 45,
-                duration: 0.9,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: element,
-                    start: "top 88%",
-                    once: true
-                }
+                scale: 0.8,
+                x: 50,
+                duration: 1
+            }, "-=1");
+
+
+        // Scroll reveal animations
+        if (window.ScrollTrigger) {
+
+            const revealElements = document.querySelectorAll(
+                ".section-heading, .about-image, .about-content, " +
+                ".service-card, .project-card, .skill-item, " +
+                ".process-item, .contact-content, .contact-action"
+            );
+
+            revealElements.forEach(element => {
+
+                gsap.from(element, {
+                    opacity: 0,
+                    y: 45,
+                    duration: 0.9,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: element,
+                        start: "top 88%",
+                        toggleActions: "play none none reverse"
+                    }
+                });
+
             });
 
-        });
-
-
-        /* STAGGER SERVICES */
-
-        if (document.querySelector(".service-card")) {
-            gsap.from(".service-card", {
+            // Project cards stagger
+            gsap.from(".project-card", {
                 opacity: 0,
-                y: 60,
+                y: 50,
                 stagger: 0.2,
                 duration: 0.8,
                 ease: "power3.out",
                 scrollTrigger: {
-                    trigger: ".services-grid",
-                    start: "top 80%",
-                    once: true
+                    trigger: ".projects-grid",
+                    start: "top 85%"
                 }
             });
-        }
 
-
-        /* STAGGER PROJECTS */
-
-        if (document.querySelector(".project-card")) {
-            gsap.from(".project-card", {
+            // Skills stagger
+            gsap.from(".skill-item", {
                 opacity: 0,
-                y: 70,
-                stagger: 0.2,
-                duration: 1,
-                ease: "power3.out",
+                scale: 0.85,
+                stagger: 0.1,
+                duration: 0.6,
                 scrollTrigger: {
-                    trigger: ".featured-projects",
-                    start: "top 80%",
-                    once: true
-                }
-            });
-        }
-
-
-        /* PARALLAX HERO VISUAL */
-
-        if (window.ScrollTrigger && document.querySelector(".hero-visual")) {
-
-            gsap.to(".hero-visual", {
-                y: 100,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: ".hero-section",
-                    start: "top top",
-                    end: "bottom top",
-                    scrub: true
+                    trigger: ".skills-grid",
+                    start: "top 85%"
                 }
             });
 
@@ -216,121 +263,106 @@ document.addEventListener("DOMContentLoaded", () => {
 
     } else {
 
-        document.querySelectorAll(
-            ".section-label, .about-grid, .section-top, " +
-            ".service-card, .project-card, .why-card, .final-cta"
-        ).forEach(element => {
-            element.style.opacity = "1";
-            element.style.transform = "none";
+        console.warn("GSAP could not be loaded.");
+
+    }
+
+
+    /* -------------------------------------
+       6. 3D HERO CARD INTERACTION
+    ------------------------------------- */
+
+    const heroVisual = document.querySelector(".hero-visual");
+    const visualCard = document.querySelector(".visual-card");
+
+    if (
+        heroVisual &&
+        visualCard &&
+        window.matchMedia("(pointer: fine)").matches
+    ) {
+
+        heroVisual.addEventListener("mousemove", event => {
+
+            const rect = heroVisual.getBoundingClientRect();
+
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateY = ((x - centerX) / centerX) * 12;
+            const rotateX = ((centerY - y) / centerY) * 12;
+
+            visualCard.style.animation = "none";
+
+            visualCard.style.transform =
+                `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+        });
+
+        heroVisual.addEventListener("mouseleave", () => {
+
+            visualCard.style.animation = "";
+            visualCard.style.transform = "";
+
         });
 
     }
 
 
-    /* =====================================
-       5. THREE.JS 3D HERO SCENE
-    ===================================== */
+    /* -------------------------------------
+       7. THREE.JS 3D BACKGROUND
+    ------------------------------------- */
 
-    const heroScene = document.getElementById("hero3D");
+    const hero3D = document.getElementById("hero3D");
 
-    if (heroScene && typeof window.THREE !== "undefined") {
+    if (hero3D && window.THREE) {
+
+        let scene;
+        let camera;
+        let renderer;
+        let particles;
+        let animationFrame;
 
         try {
 
-            const scene = new THREE.Scene();
+            scene = new THREE.Scene();
 
-            const camera = new THREE.PerspectiveCamera(
-                45,
-                heroScene.clientWidth / heroScene.clientHeight,
+            camera = new THREE.PerspectiveCamera(
+                60,
+                hero3D.clientWidth / hero3D.clientHeight,
                 0.1,
-                100
+                1000
             );
 
-            camera.position.z = 7;
+            camera.position.z = 5;
 
-            const renderer = new THREE.WebGLRenderer({
+            renderer = new THREE.WebGLRenderer({
                 alpha: true,
                 antialias: true
             });
 
             renderer.setPixelRatio(
-                Math.min(window.devicePixelRatio, 1.5)
+                Math.min(window.devicePixelRatio, 2)
             );
 
             renderer.setSize(
-                heroScene.clientWidth,
-                heroScene.clientHeight
+                hero3D.clientWidth,
+                hero3D.clientHeight
             );
-
-            renderer.domElement.className = "three-canvas";
 
             renderer.domElement.style.position = "absolute";
             renderer.domElement.style.inset = "0";
             renderer.domElement.style.width = "100%";
             renderer.domElement.style.height = "100%";
             renderer.domElement.style.pointerEvents = "none";
-            renderer.domElement.style.zIndex = "0";
+            renderer.domElement.style.zIndex = "1";
 
-            heroScene.appendChild(renderer.domElement);
+            hero3D.appendChild(renderer.domElement);
 
-
-            /* ORANGE 3D TORUS */
-
-            const torusGeometry = new THREE.TorusGeometry(
-                2.1,
-                0.012,
-                12,
-                120
-            );
-
-            const torusMaterial = new THREE.MeshBasicMaterial({
-                color: 0xFF6B2C,
-                transparent: true,
-                opacity: 0.8
-            });
-
-            const torus = new THREE.Mesh(
-                torusGeometry,
-                torusMaterial
-            );
-
-            torus.rotation.x = 1.1;
-            torus.rotation.y = 0.4;
-
-            scene.add(torus);
-
-
-            /* SECOND ORBIT */
-
-            const secondGeometry = new THREE.TorusGeometry(
-                2.5,
-                0.008,
-                10,
-                100
-            );
-
-            const secondMaterial = new THREE.MeshBasicMaterial({
-                color: 0xFF6B2C,
-                transparent: true,
-                opacity: 0.4
-            });
-
-            const secondTorus = new THREE.Mesh(
-                secondGeometry,
-                secondMaterial
-            );
-
-            secondTorus.rotation.x = 0.5;
-            secondTorus.rotation.y = 1.2;
-
-            scene.add(secondTorus);
-
-
-            /* FLOATING PARTICLES */
-
-            const particleCount = 180;
-
-            const particleGeometry = new THREE.BufferGeometry();
+            // Particle geometry
+            const particleCount = 900;
 
             const positions = new Float32Array(
                 particleCount * 3
@@ -338,93 +370,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
             for (let i = 0; i < particleCount; i++) {
 
-                positions[i * 3] =
-                    (Math.random() - 0.5) * 9;
+                const i3 = i * 3;
 
-                positions[i * 3 + 1] =
-                    (Math.random() - 0.5) * 9;
-
-                positions[i * 3 + 2] =
-                    (Math.random() - 0.5) * 5;
+                positions[i3] = (Math.random() - 0.5) * 9;
+                positions[i3 + 1] = (Math.random() - 0.5) * 9;
+                positions[i3 + 2] = (Math.random() - 0.5) * 5;
 
             }
 
-            particleGeometry.setAttribute(
+            const geometry = new THREE.BufferGeometry();
+
+            geometry.setAttribute(
                 "position",
                 new THREE.BufferAttribute(positions, 3)
             );
 
-            const particleMaterial = new THREE.PointsMaterial({
-                color: 0xFF6B2C,
-                size: 0.025,
+            const material = new THREE.PointsMaterial({
+                color: 0xff6b2c,
+                size: 0.018,
                 transparent: true,
-                opacity: 0.7
+                opacity: 0.65,
+                sizeAttenuation: true
             });
 
-            const particles = new THREE.Points(
-                particleGeometry,
-                particleMaterial
+            particles = new THREE.Points(
+                geometry,
+                material
             );
 
             scene.add(particles);
 
-
-            /* MOUSE MOVEMENT */
-
-            let mouseX = 0;
-            let mouseY = 0;
-
-            heroScene.addEventListener("mousemove", event => {
-
-                const rect = heroScene.getBoundingClientRect();
-
-                mouseX =
-                    ((event.clientX - rect.left) / rect.width - 0.5);
-
-                mouseY =
-                    ((event.clientY - rect.top) / rect.height - 0.5);
-
-            });
-
-            heroScene.addEventListener("mouseleave", () => {
-                mouseX = 0;
-                mouseY = 0;
-            });
-
-
-            /* ANIMATION LOOP */
-
-            let animationId;
-            let isVisible = true;
-
-            const observer = new IntersectionObserver(entries => {
-                isVisible = entries[0].isIntersecting;
-
-                if (isVisible) {
-                    animate();
-                } else {
-                    cancelAnimationFrame(animationId);
-                }
-            });
-
-            observer.observe(heroScene);
+            // Animation loop
+            const clock = new THREE.Clock();
 
             function animate() {
 
-                if (!isVisible) return;
+                animationFrame = requestAnimationFrame(animate);
 
-                animationId = requestAnimationFrame(animate);
+                const elapsed = clock.getElapsedTime();
 
-                torus.rotation.z += 0.0015;
-                secondTorus.rotation.z -= 0.001;
-
-                particles.rotation.y += 0.0005;
-
-                torus.rotation.y +=
-                    (mouseX * 0.25 - torus.rotation.y) * 0.02;
-
-                torus.rotation.x +=
-                    (mouseY * 0.25 + 1.1 - torus.rotation.x) * 0.02;
+                particles.rotation.y = elapsed * 0.035;
+                particles.rotation.x = Math.sin(elapsed * 0.2) * 0.08;
 
                 renderer.render(scene, camera);
 
@@ -432,13 +418,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
             animate();
 
-
-            /* RESPONSIVE RESIZE */
-
+            // Responsive resize
             const resizeObserver = new ResizeObserver(() => {
 
-                const width = heroScene.clientWidth;
-                const height = heroScene.clientHeight;
+                const width = hero3D.clientWidth;
+                const height = hero3D.clientHeight;
 
                 if (!width || !height) return;
 
@@ -449,102 +433,107 @@ document.addEventListener("DOMContentLoaded", () => {
 
             });
 
-            resizeObserver.observe(heroScene);
+            resizeObserver.observe(hero3D);
+
+            // Cleanup if page is unloaded
+            window.addEventListener("beforeunload", () => {
+
+                cancelAnimationFrame(animationFrame);
+
+                resizeObserver.disconnect();
+
+                geometry.dispose();
+                material.dispose();
+                renderer.dispose();
+
+            });
 
         } catch (error) {
-            console.error("3D Scene Error:", error);
+
+            console.error("Three.js initialization failed:", error);
+
         }
+
+    } else {
+
+        console.warn("Three.js could not be loaded.");
 
     }
 
 
-    /* =====================================
-       6. CARD TILT EFFECT
-    ===================================== */
+    /* -------------------------------------
+       8. SERVICE CARD HOVER EFFECT
+    ------------------------------------- */
 
-    const tiltCards = document.querySelectorAll(
-        ".service-card, .project-card"
+    document.querySelectorAll(".service-card").forEach(card => {
+
+        card.addEventListener("mousemove", event => {
+
+            const rect = card.getBoundingClientRect();
+
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            card.style.background =
+                `radial-gradient(circle at ${x}px ${y}px, rgba(255,107,44,0.09), #14151c 65%)`;
+
+        });
+
+        card.addEventListener("mouseleave", () => {
+
+            card.style.background = "";
+
+        });
+
+    });
+
+
+    /* -------------------------------------
+       9. PROJECT CARD TILT EFFECT
+    ------------------------------------- */
+
+    document.querySelectorAll(".project-card").forEach(card => {
+
+        card.addEventListener("mousemove", event => {
+
+            if (!window.matchMedia("(pointer: fine)").matches) return;
+
+            const rect = card.getBoundingClientRect();
+
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+
+            const rotateY = ((x / rect.width) - 0.5) * 8;
+            const rotateX = (0.5 - (y / rect.height)) * 8;
+
+            card.style.transform =
+                `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+
+        });
+
+        card.addEventListener("mouseleave", () => {
+
+            card.style.transform = "";
+
+        });
+
+    });
+
+
+    /* -------------------------------------
+       10. PAGE LOADED
+    ------------------------------------- */
+
+    document.body.classList.add("page-loaded");
+
+    console.log(
+        "%cHammad Khalid Portfolio",
+        "color:#ff6b2c;font-size:18px;font-weight:bold;"
     );
 
-    const isTouchDevice =
-        window.matchMedia("(pointer: coarse)").matches;
-
-    if (!isTouchDevice) {
-
-        tiltCards.forEach(card => {
-
-            card.addEventListener("mousemove", event => {
-
-                const rect = card.getBoundingClientRect();
-
-                const x = event.clientX - rect.left;
-                const y = event.clientY - rect.top;
-
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-
-                const rotateX = (centerY - y) / 25;
-                const rotateY = (x - centerX) / 25;
-
-                card.style.transform =
-                    `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
-
-            });
-
-            card.addEventListener("mouseleave", () => {
-                card.style.transform = "";
-            });
-
-        });
-
-    }
-
-
-    /* =====================================
-       7. BUTTON HOVER EFFECT
-    ===================================== */
-
-    document.querySelectorAll(
-        ".primary-button, .secondary-button"
-    ).forEach(button => {
-
-        button.addEventListener("mouseenter", () => {
-            button.style.transition = "all 0.3s ease";
-        });
-
-    });
-
-
-    /* =====================================
-       8. ACTIVE NAVIGATION LINK
-    ===================================== */
-
-    const currentPage = window.location.pathname
-        .split("/")
-        .pop() || "index.html";
-
-    document.querySelectorAll(".navbar a").forEach(link => {
-
-        const linkPage = link.getAttribute("href");
-
-        if (linkPage === currentPage) {
-            link.classList.add("active");
-        } else {
-            link.classList.remove("active");
-        }
-
-    });
-
-
-    /* =====================================
-       9. ACCESSIBILITY
-    ===================================== */
-
-    document.querySelectorAll(".menu-toggle").forEach(button => {
-        button.setAttribute("aria-expanded", "false");
-    });
-
-
-    console.log("Hammad Khalid Portfolio Loaded Successfully.");
+    console.log(
+        "%cWordPress Developer | 3+ Years Experience",
+        "color:#999;font-size:12px;"
+    );
 
 });
