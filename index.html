@@ -1,670 +1,644 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#101114">
-
-    <meta name="description" content="Hammad Khalid - Professional WordPress Developer. Business websites, WooCommerce stores, redesign and maintenance.">
-
+    <meta name="description" content="Hammad Khalid - WordPress Developer and Custom Coder.">
+    <meta name="author" content="Hammad Khalid">
     <title>Hammad Khalid | WordPress Developer</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
-    <!-- PRELOADER -->
-    <div class="preloader" id="preloader">
-        <div class="loader-content">
-            <span class="loader-logo">HK<span>.</span></span>
-            <div class="loader-line"></div>
-            <p>CRAFTING DIGITAL EXPERIENCES</p>
-        </div>
+    <!-- Background Universe -->
+    <div id="universe">
+        <canvas id="particles"></canvas>
+        <div class="ambient ambient-one"></div>
+        <div class="ambient ambient-two"></div>
     </div>
 
-    <!-- BACKGROUND -->
-    <div class="background-effects">
-        <div class="glow glow-one"></div>
-        <div class="glow glow-two"></div>
-        <div class="grid-overlay"></div>
-    </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
 
-    <!-- NAVBAR -->
-    <header class="navbar" id="navbar">
-        <div class="nav-container">
+                <a href="#home" class="logo">
+                    HAMMAD<span>.</span>
+                </a>
 
-            <a href="#home" class="logo">HK<span>.</span></a>
+                <button class="menu-btn" id="menuBtn" aria-label="Open navigation">
+                    ☰
+                </button>
 
-            <nav class="nav-menu" id="navMenu">
-                <a href="#home" class="nav-link active">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#skills" class="nav-link">Skills</a>
-                <a href="#projects" class="nav-link">Projects</a>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+
+                <a href="#contact" class="btn">
+                    Let's Talk ↗
+                </a>
+
             </nav>
-
-            <a href="#contact" class="nav-cta">
-                Let's Talk <span>↗</span>
-            </a>
-
-            <button class="menu-toggle" id="menuToggle"
-                aria-label="Toggle navigation"
-                aria-expanded="false"
-                aria-controls="navMenu">
-                <span></span>
-                <span></span>
-            </button>
-
         </div>
     </header>
 
+
+    <!-- Hero Section -->
     <main>
 
-        <!-- HERO -->
-        <section class="hero section" id="home">
-            <div class="hero-container">
+        <section class="hero" id="home">
+            <div class="container hero-container">
 
-                <div class="hero-content" data-reveal>
+                <div class="hero-content">
 
-                    <div class="availability">
+                    <div class="available">
                         <span class="status-dot"></span>
                         AVAILABLE FOR NEW PROJECTS
                     </div>
 
-                    <p class="hero-intro">HELLO, I'M</p>
+                    <p class="hero-intro">HELLO, I'M HAMMAD KHALID</p>
 
-                    <h1 class="hero-title">
-                        Hammad
-                        <span>Khalid<span class="orange-dot">.</span></span>
+                    <h1>
+                        I BUILD
+                        <span>DIGITAL</span>
+                        EXPERIENCES.
                     </h1>
 
-                    <h2 class="hero-role">WordPress Developer</h2>
+                    <h2 class="hero-subtitle">
+                        WordPress Developer & Custom Coder
+                    </h2>
 
                     <p class="hero-description">
-                        I build modern, high-performing and visually
-                        engaging websites that help businesses
-                        establish a powerful digital presence.
+                        I create modern, responsive and powerful WordPress
+                        websites that help businesses build their digital
+                        presence and grow online.
                     </p>
 
                     <div class="hero-buttons">
-                        <a href="#contact" class="btn btn-primary">
-                            Start a Project <span>↗</span>
+                        <a href="#projects" class="btn">
+                            Explore My Work ↗
                         </a>
 
-                        <a href="#projects" class="btn btn-outline">
-                            Explore My Work <span>↓</span>
+                        <a href="#contact" class="btn-outline">
+                            Hire Me
                         </a>
                     </div>
 
-                    <div class="hero-socials">
-                        <span>FOLLOW ME</span>
-                        <a href="#" target="_blank">LinkedIn ↗</a>
-                        <a href="#" target="_blank">Instagram ↗</a>
+                    <div class="hero-stats">
+                        <div>
+                            <strong>3+</strong>
+                            <span>Years Experience</span>
+                        </div>
+
+                        <div>
+                            <strong>WP</strong>
+                            <span>Development Expert</span>
+                        </div>
+
+                        <div>
+                            <strong>100%</strong>
+                            <span>Project Commitment</span>
+                        </div>
                     </div>
 
                 </div>
 
-                <!-- PROFILE -->
-                <div class="hero-visual" data-reveal>
 
-                    <div class="visual-circle circle-one"></div>
-                    <div class="visual-circle circle-two"></div>
+                <!-- 3D Developer Universe -->
+                <div class="hero-visual">
 
-                    <div class="profile-card" id="profileCard">
+                    <div class="energy-portal"></div>
+                    <div class="portal-inner"></div>
 
-                        <div class="profile-glow"></div>
+                    <div class="orbit orbit-one"></div>
+                    <div class="orbit orbit-two"></div>
+                    <div class="orbit orbit-three"></div>
 
-                        <img
-                            src="images/hammad-profile.png"
-                            alt="Hammad Khalid - WordPress Developer"
-                            class="profile-image"
-                        >
+                    <!-- 3D Laptop -->
+                    <div class="laptop-scene" id="laptopScene">
 
-                        <div class="profile-overlay"></div>
+                        <div class="laptop-screen">
 
-                        <div class="profile-caption">
-                            <span>CREATIVE DEVELOPER</span>
-                            <h3>Turning Ideas Into Reality.</h3>
+                            <div class="laptop-topbar">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                                <p>hammadkhalid.dev</p>
+                            </div>
+
+                            <div class="laptop-display">
+
+                                <div class="display-navbar">
+                                    <strong>HK<span>.</span></strong>
+                                    <div>HOME &nbsp; ABOUT &nbsp; WORK</div>
+                                </div>
+
+                                <div class="display-content">
+                                    <small>CREATIVE DEVELOPER</small>
+
+                                    <h2>
+                                        BUILDING
+                                        <span>THE FUTURE.</span>
+                                    </h2>
+
+                                    <p>
+                                        Websites that make businesses stand out.
+                                    </p>
+
+                                    <div class="display-button">
+                                        EXPLORE MORE ↗
+                                    </div>
+                                </div>
+
+                                <div class="display-decoration"></div>
+
+                            </div>
+
                         </div>
+
+                        <div class="laptop-base"></div>
 
                     </div>
 
-                    <div class="floating-card experience-card">
-                        <div class="floating-icon">✦</div>
-                        <div>
-                            <h3>3+ Years</h3>
-                            <p>Experience</p>
-                        </div>
+
+                    <!-- Floating Technology Elements -->
+                    <div class="floating-tech wordpress-icon">
+                        <span>W</span>
+                        <small>WORDPRESS</small>
                     </div>
 
-                    <div class="floating-card wordpress-card">
-                        <div class="wp-symbol">W</div>
-                        <div>
-                            <h3>WordPress</h3>
-                            <p>Development</p>
-                        </div>
+                    <div class="floating-tech woo-icon">
+                        <span>W</span>
+                        <small>WOOCOMMERCE</small>
                     </div>
 
-                    <div class="hero-orbit"></div>
+                    <div class="floating-tech php-icon">
+                        <span>PHP</span>
+                    </div>
+
+                    <div class="floating-tech code-icon">
+                        <span>&lt;/&gt;</span>
+                    </div>
+
+                    <div class="floating-tech elementor-icon">
+                        <span>E</span>
+                        <small>ELEMENTOR</small>
+                    </div>
+
+
+                    <!-- Holographic Panels -->
+                    <div class="hologram hologram-one">
+                        <span>01 / DEVELOPMENT</span>
+                        <strong>Creative Coding</strong>
+                    </div>
+
+                    <div class="hologram hologram-two">
+                        <span>02 / E-COMMERCE</span>
+                        <strong>Digital Experiences</strong>
+                    </div>
+
+
+                    <!-- Energy Particles -->
+                    <div class="energy-particle particle-one"></div>
+                    <div class="energy-particle particle-two"></div>
+                    <div class="energy-particle particle-three"></div>
+                    <div class="energy-particle particle-four"></div>
+                    <div class="energy-particle particle-five"></div>
+
                 </div>
 
             </div>
 
-            <div class="hero-bottom">
-                <span>SCROLL TO EXPLORE</span>
-                <div class="scroll-line"></div>
+            <div class="scroll-indicator">
+                SCROLL TO EXPLORE
+                <span>↓</span>
             </div>
+
         </section>
 
-        <!-- STATS -->
-        <section class="stats-section">
-            <div class="stats-container">
 
-                <div class="stat-item">
-                    <h2><span data-count="3">0</span>+</h2>
-                    <p>Years Experience</p>
-                </div>
+        <!-- About Section -->
+        <section class="section about-section" id="about">
 
-                <div class="stat-item">
-                    <h2>100<span>%</span></h2>
-                    <p>Client Focused</p>
-                </div>
+            <div class="container">
 
-                <div class="stat-item">
-                    <h2>24<span>/7</span></h2>
-                    <p>Digital Mindset</p>
-                </div>
-
-                <div class="stat-item">
-                    <h2>∞</h2>
-                    <p>Creative Possibilities</p>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ABOUT -->
-        <section class="about section" id="about">
-            <div class="section-container">
-
-                <div class="section-heading" data-reveal>
+                <div class="section-heading">
                     <span class="section-label">01 / ABOUT ME</span>
-
-                    <h2>
-                        Building Digital
-                        <span>Experiences</span>
-                    </h2>
-
+                    <h2>More Than Just <span>Code.</span></h2>
                     <p>
-                        More than just websites. I create digital
-                        experiences that communicate value.
+                        I transform ideas into meaningful digital experiences
+                        through creative design and development.
                     </p>
                 </div>
 
                 <div class="about-grid">
 
-                    <div class="about-left" data-reveal>
-                        <div class="about-image-box">
-                            <img
-                                src="images/hammad-profile.png"
-                                alt="Hammad Khalid"
-                            >
-
-                            <div class="about-image-tag">
-                                <span>HK.</span>
-                                <p>CREATIVE THINKER</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="about-right" data-reveal>
-
-                        <span class="small-heading">WHO I AM</span>
-
+                    <div class="about-content">
                         <h3>
-                            I turn business ideas into
-                            <span>digital realities.</span>
+                            Building Digital Solutions
+                            That Make A Difference.
                         </h3>
 
                         <p>
-                            I'm Hammad Khalid, a WordPress Developer
-                            with 3+ years of experience in creating
-                            modern, responsive and professional websites.
+                            I'm Hammad Khalid, a WordPress Developer and
+                            Custom Coder with 3+ years of experience.
+                            I specialize in creating professional websites,
+                            e-commerce solutions and customized digital
+                            experiences.
                         </p>
 
                         <p>
-                            My focus is on helping businesses build
-                            credibility, improve their online presence
-                            and deliver better experiences to customers.
+                            My focus is on understanding business requirements
+                            and turning them into responsive, functional
+                            and user-friendly websites.
                         </p>
 
-                        <div class="about-details">
+                        <a href="#contact" class="btn">
+                            Let's Work Together ↗
+                        </a>
+                    </div>
 
-                            <div>
-                                <span>NAME</span>
-                                <h4>Hammad Khalid</h4>
+                    <div class="about-visual">
+
+                        <div class="about-card">
+                            <span>MY EXPERTISE</span>
+                            <h3>Turning Ideas Into Reality.</h3>
+
+                            <div class="about-stat">
+                                <strong>3+</strong>
+                                <span>Years of Experience</span>
                             </div>
 
-                            <div>
-                                <span>ROLE</span>
-                                <h4>WordPress Developer</h4>
+                            <div class="about-stat">
+                                <strong>WP</strong>
+                                <span>WordPress Development</span>
                             </div>
-
-                            <div>
-                                <span>EXPERIENCE</span>
-                                <h4>3+ Years</h4>
-                            </div>
-
-                            <div>
-                                <span>WORK MODE</span>
-                                <h4>Remote / Freelance</h4>
-                            </div>
-
                         </div>
 
-                        <a href="#contact" class="text-link">
-                            Let's Discuss Your Project ↗
-                        </a>
-
                     </div>
+
                 </div>
+
             </div>
         </section>
 
-        <!-- SERVICES -->
-        <section class="services section" id="services">
-            <div class="section-container">
 
-                <div class="section-heading center" data-reveal>
+        <!-- Services Section -->
+        <section class="section services-section" id="services">
+
+            <div class="container">
+
+                <div class="section-heading">
                     <span class="section-label">02 / WHAT I DO</span>
-
-                    <h2>
-                        Services That
-                        <span>Drive Growth.</span>
-                    </h2>
-
+                    <h2>Services I <span>Provide.</span></h2>
                     <p>
-                        Professional website solutions built
-                        around your business goals.
+                        Professional digital solutions designed to help
+                        businesses establish and improve their online presence.
                     </p>
                 </div>
 
                 <div class="services-grid">
 
-                    <article class="service-card" data-reveal>
-                        <div class="service-number">01</div>
-                        <div class="service-icon">✧</div>
-                        <h3>Business Websites</h3>
+                    <article class="service-card">
+                        <span class="service-number">01</span>
+                        <div class="service-icon">✦</div>
+                        <h3>WordPress Development</h3>
                         <p>
-                            Professional websites that build trust,
-                            communicate your brand and attract customers.
+                            Professional, responsive and customized
+                            WordPress websites built around your business needs.
                         </p>
                         <a href="#contact">Discuss Project ↗</a>
                     </article>
 
-                    <article class="service-card featured" data-reveal>
-                        <div class="service-number">02</div>
+                    <article class="service-card">
+                        <span class="service-number">02</span>
+                        <div class="service-icon">▣</div>
+                        <h3>WooCommerce Development</h3>
+                        <p>
+                            Feature-rich online stores with modern layouts,
+                            smooth shopping experiences and powerful functionality.
+                        </p>
+                        <a href="#contact">Discuss Project ↗</a>
+                    </article>
+
+                    <article class="service-card">
+                        <span class="service-number">03</span>
                         <div class="service-icon">◈</div>
-                        <h3>E-commerce Websites</h3>
-                        <p>
-                            Powerful WooCommerce stores designed
-                            to showcase products and simplify shopping.
-                        </p>
-                        <a href="#contact">Discuss Project ↗</a>
-                    </article>
-
-                    <article class="service-card" data-reveal>
-                        <div class="service-number">03</div>
-                        <div class="service-icon">⟳</div>
                         <h3>Website Redesign</h3>
                         <p>
-                            Transform outdated websites into
-                            modern, attractive and responsive experiences.
+                            Transform outdated websites into modern,
+                            attractive and user-friendly digital experiences.
                         </p>
                         <a href="#contact">Discuss Project ↗</a>
                     </article>
 
-                    <article class="service-card" data-reveal>
-                        <div class="service-number">04</div>
+                    <article class="service-card">
+                        <span class="service-number">04</span>
+                        <div class="service-icon">⚙</div>
+                        <h3>Custom Development</h3>
+                        <p>
+                            Custom WordPress functionality, coding solutions,
+                            plugin customization and integrations.
+                        </p>
+                        <a href="#contact">Discuss Project ↗</a>
+                    </article>
+
+                    <article class="service-card">
+                        <span class="service-number">05</span>
                         <div class="service-icon">⌘</div>
-                        <h3>Maintenance & Fixes</h3>
+                        <h3>Website Maintenance</h3>
                         <p>
-                            Website updates, bug fixes, performance
-                            improvements and ongoing maintenance.
+                            Website updates, troubleshooting, bug fixing
+                            and ongoing technical support.
+                        </p>
+                        <a href="#contact">Discuss Project ↗</a>
+                    </article>
+
+                    <article class="service-card">
+                        <span class="service-number">06</span>
+                        <div class="service-icon">↗</div>
+                        <h3>Performance Optimization</h3>
+                        <p>
+                            Improve website speed, responsiveness,
+                            performance and user experience.
                         </p>
                         <a href="#contact">Discuss Project ↗</a>
                     </article>
 
                 </div>
+
             </div>
         </section>
 
-        <!-- SKILLS -->
-        <section class="skills section" id="skills">
-            <div class="section-container">
 
-                <div class="skills-grid">
+        <!-- Projects Section -->
+        <section class="section projects-section" id="projects">
 
-                    <div class="skills-content" data-reveal>
+            <div class="container">
 
-                        <span class="section-label">03 / MY EXPERTISE</span>
-
-                        <h2>
-                            Tools Behind
-                            <span>My Work.</span>
-                        </h2>
-
-                        <p>
-                            My development approach combines strong
-                            fundamentals with modern website-building
-                            technologies.
-                        </p>
-
-                        <div class="skill-list">
-
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <h4>HTML5</h4>
-                                    <span>Structure</span>
-                                </div>
-                                <div class="skill-bar">
-                                    <span data-width="95%"></span>
-                                </div>
-                            </div>
-
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <h4>CSS3</h4>
-                                    <span>Design & Layout</span>
-                                </div>
-                                <div class="skill-bar">
-                                    <span data-width="90%"></span>
-                                </div>
-                            </div>
-
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <h4>JavaScript</h4>
-                                    <span>Interactions</span>
-                                </div>
-                                <div class="skill-bar">
-                                    <span data-width="80%"></span>
-                                </div>
-                            </div>
-
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <h4>WordPress</h4>
-                                    <span>Website Development</span>
-                                </div>
-                                <div class="skill-bar">
-                                    <span data-width="95%"></span>
-                                </div>
-                            </div>
-
-                            <div class="skill-item">
-                                <div class="skill-info">
-                                    <h4>WooCommerce</h4>
-                                    <span>E-commerce</span>
-                                </div>
-                                <div class="skill-bar">
-                                    <span data-width="90%"></span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="skills-visual" data-reveal>
-
-                        <div class="skills-orb" id="skillsOrb">
-
-                            <div class="orb-ring ring-one"></div>
-                            <div class="orb-ring ring-two"></div>
-
-                            <div class="orb-center">
-                                <span>HK</span>
-                                <p>DEVELOPMENT</p>
-                            </div>
-
-                            <span class="orb-tag tag-html">HTML</span>
-                            <span class="orb-tag tag-css">CSS</span>
-                            <span class="orb-tag tag-js">JS</span>
-                            <span class="orb-tag tag-wp">WP</span>
-
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- PROJECTS -->
-        <section class="projects section" id="projects">
-            <div class="section-container">
-
-                <div class="section-heading" data-reveal>
-                    <span class="section-label">04 / SELECTED WORK</span>
-
-                    <h2>
-                        Projects That
-                        <span>Speak For Me.</span>
-                    </h2>
-
+                <div class="section-heading">
+                    <span class="section-label">03 / SELECTED WORK</span>
+                    <h2>Projects That <span>Speak.</span></h2>
                     <p>
-                        A selection of website experiences
-                        and digital solutions.
+                        A showcase of selected website development
+                        and digital projects.
                     </p>
                 </div>
 
                 <div class="projects-grid">
 
-                    <article class="project-card project-large" data-reveal>
-
-                        <div class="project-image">
-                            <img
-                                src="images/project-01.jpg"
-                                alt="Business website project preview"
-                                loading="lazy"
-                            >
-
-                            <div class="project-overlay">
-                                <a href="#" target="_blank"
-                                   aria-label="View project">↗</a>
-                            </div>
+                    <article class="project-card">
+                        <div class="project-image project-one">
+                            <span>PROJECT 01</span>
+                            <div class="project-preview">E-COMMERCE</div>
                         </div>
-
-                        <div class="project-details">
+                        <div class="project-info">
                             <div>
-                                <span>BUSINESS WEBSITE</span>
-                                <h3>Business Digital Experience</h3>
+                                <h3>WooCommerce Store</h3>
+                                <p>Modern e-commerce website development.</p>
                             </div>
-                            <span class="project-arrow">↗</span>
+                            <a href="#" aria-label="View WooCommerce project">↗</a>
                         </div>
-
                     </article>
 
-                    <article class="project-card" data-reveal>
-
-                        <div class="project-image">
-                            <img
-                                src="images/project-02.jpg"
-                                alt="E-commerce website project preview"
-                                loading="lazy"
-                            >
-
-                            <div class="project-overlay">
-                                <a href="#" target="_blank"
-                                   aria-label="View project">↗</a>
-                            </div>
+                    <article class="project-card">
+                        <div class="project-image project-two">
+                            <span>PROJECT 02</span>
+                            <div class="project-preview">BUSINESS WEBSITE</div>
                         </div>
-
-                        <div class="project-details">
+                        <div class="project-info">
                             <div>
-                                <span>WOOCOMMERCE</span>
-                                <h3>Online Shopping Experience</h3>
+                                <h3>Business Website</h3>
+                                <p>Professional business website design.</p>
                             </div>
-                            <span class="project-arrow">↗</span>
+                            <a href="#" aria-label="View business project">↗</a>
                         </div>
-
                     </article>
 
-                    <article class="project-card" data-reveal>
-
-                        <div class="project-image">
-                            <img
-                                src="images/project-03.jpg"
-                                alt="Website redesign project preview"
-                                loading="lazy"
-                            >
-
-                            <div class="project-overlay">
-                                <a href="#" target="_blank"
-                                   aria-label="View project">↗</a>
-                            </div>
+                    <article class="project-card">
+                        <div class="project-image project-three">
+                            <span>PROJECT 03</span>
+                            <div class="project-preview">CUSTOM WEBSITE</div>
                         </div>
-
-                        <div class="project-details">
+                        <div class="project-info">
                             <div>
-                                <span>WEBSITE REDESIGN</span>
-                                <h3>Modern Brand Website</h3>
+                                <h3>Custom WordPress Website</h3>
+                                <p>Customized WordPress development.</p>
                             </div>
-                            <span class="project-arrow">↗</span>
+                            <a href="#" aria-label="View custom project">↗</a>
                         </div>
+                    </article>
 
+                    <article class="project-card">
+                        <div class="project-image project-four">
+                            <span>PROJECT 04</span>
+                            <div class="project-preview">WEBSITE REDESIGN</div>
+                        </div>
+                        <div class="project-info">
+                            <div>
+                                <h3>Website Redesign</h3>
+                                <p>Modern redesign and user experience.</p>
+                            </div>
+                            <a href="#" aria-label="View redesign project">↗</a>
+                        </div>
                     </article>
 
                 </div>
 
-                <div class="projects-note">
+                <p class="project-note">
+                    Replace these sample project cards with your actual work
+                    and live website links.
+                </p>
+
+            </div>
+        </section>
+
+
+        <!-- Skills Section -->
+        <section class="section skills-section" id="skills">
+
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">04 / MY TOOLKIT</span>
+                    <h2>Technologies I <span>Work With.</span></h2>
                     <p>
-                        Replace these placeholder projects with
-                        your real work before publishing.
+                        Tools and technologies used to build modern
+                        digital solutions.
+                    </p>
+                </div>
+
+                <div class="skills-grid">
+
+                    <div class="skill-item">WordPress</div>
+                    <div class="skill-item">Elementor</div>
+                    <div class="skill-item">WooCommerce</div>
+                    <div class="skill-item">PHP</div>
+                    <div class="skill-item">HTML5</div>
+                    <div class="skill-item">CSS3</div>
+                    <div class="skill-item">JavaScript</div>
+                    <div class="skill-item">Custom Coding</div>
+                    <div class="skill-item">API Integration</div>
+                    <div class="skill-item">Responsive Design</div>
+                    <div class="skill-item">Website Optimization</div>
+                    <div class="skill-item">Plugin Customization</div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Experience Section -->
+        <section class="section experience-section" id="experience">
+
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">05 / MY JOURNEY</span>
+                    <h2>Experience & <span>Growth.</span></h2>
+                    <p>
+                        My professional development journey and
+                        technical expertise.
+                    </p>
+                </div>
+
+                <div class="experience-card">
+
+                    <div class="experience-marker"></div>
+
+                    <div class="experience-content">
+                        <span>PROFESSIONAL EXPERIENCE</span>
+                        <h3>WordPress Developer</h3>
+                        <p class="experience-duration">3+ Years Experience</p>
+
+                        <p>
+                            Working on WordPress websites, WooCommerce
+                            development, website customization, redesign,
+                            maintenance and custom coding solutions.
+                        </p>
+
+                        <div class="experience-tags">
+                            <span>WordPress</span>
+                            <span>WooCommerce</span>
+                            <span>Elementor</span>
+                            <span>Custom Coding</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Testimonials Section -->
+        <section class="section testimonials-section" id="testimonials">
+
+            <div class="container">
+
+                <div class="section-heading">
+                    <span class="section-label">06 / CLIENT FEEDBACK</span>
+                    <h2>What Clients <span>Say.</span></h2>
+                    <p>
+                        Genuine feedback from clients and project
+                        collaborations will appear here.
+                    </p>
+                </div>
+
+                <div class="testimonial-placeholder">
+                    <div class="testimonial-icon">“</div>
+                    <h3>Client Stories Coming Soon</h3>
+                    <p>
+                        This section will feature verified client reviews
+                        and testimonials.
                     </p>
                 </div>
 
             </div>
         </section>
 
-        <!-- WHY CHOOSE ME -->
-        <section class="why-me section">
-            <div class="section-container">
 
-                <div class="section-heading center" data-reveal>
-                    <span class="section-label">05 / WHY CHOOSE ME</span>
+        <!-- Contact Section -->
+        <section class="section contact-section" id="contact">
 
-                    <h2>
-                        More Than Just
-                        <span>Development.</span>
-                    </h2>
-                </div>
+            <div class="container">
 
-                <div class="why-grid">
+                <div class="contact-box">
 
-                    <div class="why-card" data-reveal>
-                        <span>✦</span>
-                        <h3>Modern Design</h3>
-                        <p>Clean and professional visual experiences.</p>
-                    </div>
-
-                    <div class="why-card" data-reveal>
-                        <span>◉</span>
-                        <h3>Responsive Layouts</h3>
-                        <p>Designed for desktop, tablet and mobile.</p>
-                    </div>
-
-                    <div class="why-card" data-reveal>
-                        <span>⌁</span>
-                        <h3>Business Focus</h3>
-                        <p>Websites built around real business needs.</p>
-                    </div>
-
-                    <div class="why-card" data-reveal>
-                        <span>↗</span>
-                        <h3>Clear Communication</h3>
-                        <p>Transparent project updates and support.</p>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTACT -->
-        <section class="contact section" id="contact">
-            <div class="section-container">
-
-                <div class="contact-box" data-reveal>
-
-                    <div class="contact-glow"></div>
-
-                    <span class="section-label">06 / LET'S CONNECT</span>
+                    <span class="section-label">07 / LET'S CONNECT</span>
 
                     <h2>
-                        Have a Project
-                        <span>In Mind?</span>
+                        Have A Project?
+                        <span>Let's Build It.</span>
                     </h2>
 
                     <p>
-                        Let's turn your idea into a professional
-                        digital experience. Tell me about your project
-                        and let's make it happen.
+                        Looking for a professional WordPress developer?
+                        Let's discuss your project and turn your ideas
+                        into a powerful digital experience.
                     </p>
 
                     <div class="contact-buttons">
+                        <a href="mailto:your-email@example.com" class="btn">
+                            Email Me ↗
+                        </a>
 
-                        <a href="https://wa.me/923000000000"
+                        <a href="https://wa.me/YOURNUMBER"
+                           class="btn-outline"
                            target="_blank"
-                           rel="noopener noreferrer"
-                           class="btn btn-primary">
-                            Chat on WhatsApp ↗
+                           rel="noopener noreferrer">
+                            WhatsApp
                         </a>
-
-                        <a href="mailto:your-email@example.com"
-                           class="btn btn-outline">
-                            Send an Email ↗
-                        </a>
-
                     </div>
 
-                    <div class="contact-footer">
-                        <span>LET'S BUILD SOMETHING MEANINGFUL.</span>
+                    <div class="social-links">
+                        <a href="#" target="_blank">LinkedIn</a>
+                        <a href="#" target="_blank">GitHub</a>
+                        <a href="#" target="_blank">Facebook</a>
+                        <a href="#" target="_blank">Instagram</a>
                     </div>
 
                 </div>
+
             </div>
         </section>
 
     </main>
 
-    <!-- FOOTER -->
+
+    <!-- Footer -->
     <footer class="footer">
-        <div class="footer-container">
 
-            <a href="#home" class="logo">HK<span>.</span></a>
+        <div class="container footer-content">
 
-            <p>Designed & Developed by Hammad Khalid.</p>
-
-            <a href="#home" class="back-to-top">
-                BACK TO TOP ↑
+            <a href="#home" class="logo">
+                HAMMAD<span>.</span>
             </a>
 
+            <p>
+                © <span id="currentYear"></span> Hammad Khalid.
+                All Rights Reserved.
+            </p>
+
+            <a href="#home" class="back-top">Back to Top ↑</a>
+
         </div>
 
-        <div class="copyright">
-            © <span id="currentYear"></span> Hammad Khalid.
-            All Rights Reserved.
-        </div>
     </footer>
 
-    <script src="script.js"></script>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
 
 </body>
 </html>
+</CodeBlock>
