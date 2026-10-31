@@ -1,394 +1,266 @@
 
 /* =========================================
-   HAMMAD KHALID - INTERACTIVE PORTFOLIO
-   VANILLA JAVASCRIPT
+   HAMMAD KHALID - PORTFOLIO JAVASCRIPT
 ========================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    // 01. PRELOADER
+  // 1. MOBILE NAVIGATION
+  const menuBtn = document.getElementById("menuBtn");
+  const navLinks = document.getElementById("navLinks");
 
-    const preloader = document.getElementById("preloader");
-
-    window.addEventListener("load", () => {
-        setTimeout(() => {
-            preloader?.classList.add("hidden");
-        }, 700);
+  if (menuBtn && navLinks) {
+    menuBtn.addEventListener("click", () => {
+      navLinks.classList.toggle("active");
+      menuBtn.classList.toggle("active");
     });
 
-    // Fallback in case the load event has already fired
-    if (document.readyState === "complete") {
-        setTimeout(() => {
-            preloader?.classList.add("hidden");
-        }, 700);
-    }
-
-
-    // 02. MOBILE NAVIGATION
-
-    const menuToggle = document.getElementById("menuToggle");
-    const navMenu = document.getElementById("navMenu");
-    const navLinks = document.querySelectorAll(".nav-link");
-
-    function closeMenu() {
-        navMenu?.classList.remove("open");
-        menuToggle?.setAttribute("aria-expanded", "false");
-    }
-
-    menuToggle?.addEventListener("click", () => {
-
-        const isOpen = navMenu.classList.toggle("open");
-
-        menuToggle.setAttribute(
-            "aria-expanded",
-            String(isOpen)
-        );
-
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("active");
+        menuBtn.classList.remove("active");
+      });
     });
+  }
 
-    navLinks.forEach(link => {
 
-        link.addEventListener("click", () => {
-            closeMenu();
+  // 2. SMOOTH SCROLLING
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+      const targetId = this.getAttribute("href");
+
+      if (!targetId || targetId === "#") return;
+
+      const target = document.querySelector(targetId);
+
+      if (target) {
+        e.preventDefault();
+
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
         });
-
+      }
     });
+  });
 
-    document.addEventListener("click", (event) => {
 
-        if (
-            navMenu &&
-            menuToggle &&
-            !navMenu.contains(event.target) &&
-            !menuToggle.contains(event.target)
-        ) {
-            closeMenu();
+  // 3. NAVBAR SCROLL EFFECT
+  const header = document.querySelector("header");
+
+  function updateHeader() {
+    if (!header) return;
+
+    header.classList.toggle("scrolled", window.scrollY > 50);
+  }
+
+  window.addEventListener("scroll", updateHeader);
+  updateHeader();
+
+
+  // 4. SCROLL REVEAL ANIMATION
+  const revealElements = document.querySelectorAll(
+    ".section-heading, .about-content, .service-card, " +
+    ".project-card, .skill-item, .experience-item, " +
+    ".testimonial-card, .contact-content"
+  );
+
+  revealElements.forEach(element => {
+    element.classList.add("reveal");
+  });
+
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
         }
-
+      });
+    }, {
+      threshold: 0.12
     });
-
-
-    // 03. NAVBAR SCROLL EFFECT
-
-    const navbar = document.getElementById("navbar");
-
-    function updateNavbar() {
-
-        if (!navbar) return;
-
-        if (window.scrollY > 50) {
-            navbar.classList.add("scrolled");
-        } else {
-            navbar.classList.remove("scrolled");
-        }
-
-    }
-
-    window.addEventListener("scroll", updateNavbar, {
-        passive: true
-    });
-
-    updateNavbar();
-
-
-    // 04. SCROLL REVEAL ANIMATION
-
-    const revealElements = document.querySelectorAll("[data-reveal]");
-
-    const revealObserver = new IntersectionObserver(
-        (entries, observer) => {
-
-            entries.forEach(entry => {
-
-                if (entry.isIntersecting) {
-
-                    entry.target.classList.add("revealed");
-
-                    observer.unobserve(entry.target);
-
-                }
-
-            });
-
-        },
-        {
-            threshold: 0.12,
-            rootMargin: "0px 0px -40px 0px"
-        }
-    );
 
     revealElements.forEach(element => {
-        revealObserver.observe(element);
+      revealObserver.observe(element);
+    });
+  } else {
+    revealElements.forEach(element => {
+      element.classList.add("visible");
+    });
+  }
+
+
+  // 5. MOUSE RESPONSIVE LAPTOP EFFECT
+  const laptopScene = document.getElementById("laptopScene");
+
+  if (laptopScene && window.matchMedia("(pointer: fine)").matches) {
+    laptopScene.addEventListener("mousemove", (e) => {
+      const rect = laptopScene.getBoundingClientRect();
+
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+
+      laptopScene.style.transform =
+        `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 8}deg)`;
     });
 
+    laptopScene.addEventListener("mouseleave", () => {
+      laptopScene.style.transform =
+        "perspective(1000px) rotateY(0deg) rotateX(0deg)";
+    });
+  }
 
-    // 05. 3D PROFILE CARD
 
-    const profileCard = document.getElementById("profileCard");
+  // 6. PARTICLE BACKGROUND
+  const canvas = document.getElementById("particles");
+  const ctx = canvas ? canvas.getContext("2d") : null;
 
-    const canHover = window.matchMedia(
-        "(hover: hover) and (pointer: fine)"
-    ).matches;
+  if (canvas && ctx) {
+    let particles = [];
+    let animationFrame;
+    let width = 0;
+    let height = 0;
 
-    const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches;
+    const particleCount = window.innerWidth < 768 ? 35 : 75;
 
-    if (profileCard && canHover && !reducedMotion) {
+    function resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-        profileCard.addEventListener("mousemove", (event) => {
+      width = window.innerWidth;
+      height = window.innerHeight;
 
-            const rect = profileCard.getBoundingClientRect();
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
 
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
+      canvas.style.width = width + "px";
+      canvas.style.height = height + "px";
 
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX = ((y - centerY) / centerY) * -10;
-            const rotateY = ((x - centerX) / centerX) * 10;
-
-            profileCard.style.transform = `
-                perspective(1000px)
-                rotateX(${rotateX}deg)
-                rotateY(${rotateY}deg)
-                scale3d(1.02, 1.02, 1.02)
-            `;
-
-        });
-
-        profileCard.addEventListener("mouseleave", () => {
-
-            profileCard.style.transform = `
-                perspective(1000px)
-                rotateX(5deg)
-                rotateY(-10deg)
-                scale3d(1, 1, 1)
-            `;
-
-        });
-
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.4;
+        this.speedY = (Math.random() - 0.5) * 0.4;
+        this.opacity = Math.random() * 0.5 + 0.15;
+      }
 
-    // 06. ANIMATED SKILL BARS
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
 
-    const skillBars = document.querySelectorAll(
-        ".skill-bar span[data-width]"
-    );
+        if (this.x < 0 || this.x > width) this.speedX *= -1;
+        if (this.y < 0 || this.y > height) this.speedY *= -1;
+      }
 
-    const skillObserver = new IntersectionObserver(
-        (entries, observer) => {
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 105, 45, ${this.opacity})`;
+        ctx.fill();
+      }
+    }
 
-            entries.forEach(entry => {
+    function createParticles() {
+      particles = [];
 
-                if (entry.isIntersecting) {
+      for (let i = 0; i < particleCount; i++) {
+        particles.push(new Particle());
+      }
+    }
 
-                    const bar = entry.target;
-                    const width = bar.dataset.width;
+    function connectParticles() {
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
 
-                    bar.style.width = width;
+          if (distance < 110) {
+            ctx.beginPath();
+            ctx.strokeStyle =
+              `rgba(255, 105, 45, ${0.12 * (1 - distance / 110)})`;
 
-                    observer.unobserve(bar);
-
-                }
-
-            });
-
-        },
-        {
-            threshold: 0.5
+            ctx.lineWidth = 0.6;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
         }
-    );
+      }
+    }
 
-    skillBars.forEach(bar => {
-        skillObserver.observe(bar);
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+
+      connectParticles();
+
+      animationFrame = requestAnimationFrame(animateParticles);
+    }
+
+    resizeCanvas();
+    createParticles();
+    animateParticles();
+
+    window.addEventListener("resize", () => {
+      cancelAnimationFrame(animationFrame);
+      resizeCanvas();
+      createParticles();
+      animateParticles();
     });
+  }
 
 
-    // 07. ANIMATED STATISTICS
+  // 7. ACTIVE NAVIGATION LINK
+  const sections = document.querySelectorAll("section[id]");
+  const navigationLinks = document.querySelectorAll("#navLinks a");
 
-    const counters = document.querySelectorAll("[data-count]");
-
-    const counterObserver = new IntersectionObserver(
-        (entries, observer) => {
-
-            entries.forEach(entry => {
-
-                if (!entry.isIntersecting) return;
-
-                const counter = entry.target;
-                const target = Number(counter.dataset.count);
-
-                const duration = 1500;
-                const startTime = performance.now();
-
-                function updateCounter(currentTime) {
-
-                    const progress = Math.min(
-                        (currentTime - startTime) / duration,
-                        1
-                    );
-
-                    const easedProgress =
-                        1 - Math.pow(1 - progress, 4);
-
-                    const currentValue = Math.floor(
-                        easedProgress * target
-                    );
-
-                    counter.textContent = currentValue;
-
-                    if (progress < 1) {
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        counter.textContent = target;
-                    }
-
-                }
-
-                requestAnimationFrame(updateCounter);
-
-                observer.unobserve(counter);
-
-            });
-
-        },
-        {
-            threshold: 0.6
+  if ("IntersectionObserver" in window) {
+    const sectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navigationLinks.forEach(link => {
+            link.classList.toggle(
+              "active",
+              link.getAttribute("href") === `#${entry.target.id}`
+            );
+          });
         }
-    );
-
-    counters.forEach(counter => {
-        counterObserver.observe(counter);
+      });
+    }, {
+      threshold: 0.35
     });
-
-
-    // 08. ACTIVE NAVIGATION LINK
-
-    const sections = document.querySelectorAll(
-        "main section[id]"
-    );
-
-    const sectionObserver = new IntersectionObserver(
-        (entries) => {
-
-            entries.forEach(entry => {
-
-                if (!entry.isIntersecting) return;
-
-                const sectionId = entry.target.id;
-
-                navLinks.forEach(link => {
-
-                    link.classList.toggle(
-                        "active",
-                        link.getAttribute("href") === `#${sectionId}`
-                    );
-
-                });
-
-            });
-
-        },
-        {
-            rootMargin: "-30% 0px -60% 0px",
-            threshold: 0
-        }
-    );
 
     sections.forEach(section => {
-        sectionObserver.observe(section);
+      sectionObserver.observe(section);
     });
+  }
 
 
-    // 09. 3D SKILLS ORB MOUSE INTERACTION
+  // 8. CURRENT YEAR
+  const yearElement = document.getElementById("currentYear");
 
-    const skillsOrb = document.getElementById("skillsOrb");
-
-    if (skillsOrb && canHover && !reducedMotion) {
-
-        skillsOrb.addEventListener("mousemove", (event) => {
-
-            const rect = skillsOrb.getBoundingClientRect();
-
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
-
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateY = ((x - centerX) / centerX) * 12;
-            const rotateX = ((centerY - y) / centerY) * 12;
-
-            skillsOrb.style.transform = `
-                perspective(1000px)
-                rotateX(${rotateX}deg)
-                rotateY(${rotateY}deg)
-                translateY(-5px)
-            `;
-
-        });
-
-        skillsOrb.addEventListener("mouseleave", () => {
-
-            skillsOrb.style.transform = "";
-
-        });
-
-    }
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
 
 
-    // 10. CURRENT YEAR
+  // 9. REDUCE MOTION SUPPORT
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
 
-    const currentYear = document.getElementById("currentYear");
-
-    if (currentYear) {
-        currentYear.textContent = new Date().getFullYear();
-    }
-
-
-    // 11. SMOOTH ANCHOR SCROLL
-
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
-        anchor.addEventListener("click", function(event) {
-
-            const targetId = this.getAttribute("href");
-
-            if (!targetId || targetId === "#") {
-                event.preventDefault();
-                return;
-            }
-
-            const target = document.querySelector(targetId);
-
-            if (target) {
-
-                event.preventDefault();
-
-                target.scrollIntoView({
-                    behavior: reducedMotion ? "auto" : "smooth",
-                    block: "start"
-                });
-
-            }
-
-        });
-
-    });
-
-
-    // 12. CONSOLE MESSAGE
-
-    console.log(
-        "%c HAMMAD KHALID ",
-        "background:#ff6b35;color:white;padding:10px;font-weight:bold;"
-    );
-
-    console.log(
-        "Portfolio successfully initialized."
-    );
+  if (prefersReducedMotion) {
+    document.documentElement.style.scrollBehavior = "auto";
+  }
 
 });
