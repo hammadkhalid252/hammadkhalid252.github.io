@@ -1,9 +1,13 @@
 
+/* =====================================================
+   HAMMAD KHALID — PORTFOLIO JAVASCRIPT
+===================================================== */
+
 document.addEventListener("DOMContentLoaded", () => {
   "use strict";
 
   // ==========================================
-  // ELEMENT SELECTORS
+  // SELECTORS
   // ==========================================
 
   const select = (selector, parent = document) =>
@@ -12,13 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const selectAll = (selector, parent = document) =>
     [...parent.querySelectorAll(selector)];
 
+
   // ==========================================
   // PRELOADER
   // ==========================================
 
   const preloader = select(".preloader");
 
-  const hidePreloader = () => {
+  function hidePreloader() {
     if (!preloader) return;
 
     preloader.classList.add("loaded");
@@ -26,14 +31,14 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       preloader.style.display = "none";
     }, 700);
-  };
+  }
 
   window.addEventListener("load", hidePreloader);
 
-  // Fallback in case load event has already fired
   if (document.readyState === "complete") {
     hidePreloader();
   }
+
 
   // ==========================================
   // CUSTOM CURSOR
@@ -42,9 +47,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const cursor = select(".cursor");
   const cursorFollower = select(".cursor-follower");
 
-  if (cursor && cursorFollower && window.matchMedia("(pointer: fine)").matches) {
+  if (
+    cursor &&
+    cursorFollower &&
+    window.matchMedia("(pointer: fine)").matches
+  ) {
     let mouseX = 0;
     let mouseY = 0;
+
     let followerX = 0;
     let followerY = 0;
 
@@ -56,19 +66,19 @@ document.addEventListener("DOMContentLoaded", () => {
       cursor.style.top = `${mouseY}px`;
     });
 
-    const animateFollower = () => {
+    function animateCursor() {
       followerX += (mouseX - followerX) * 0.15;
       followerY += (mouseY - followerY) * 0.15;
 
       cursorFollower.style.left = `${followerX}px`;
       cursorFollower.style.top = `${followerY}px`;
 
-      requestAnimationFrame(animateFollower);
-    };
+      requestAnimationFrame(animateCursor);
+    }
 
-    animateFollower();
+    animateCursor();
 
-    selectAll("a, button, input, textarea, .project-card").forEach((element) => {
+    selectAll("a, button, input, textarea, select").forEach((element) => {
       element.addEventListener("mouseenter", () => {
         cursor.classList.add("cursor-hover");
         cursorFollower.classList.add("cursor-hover");
@@ -81,37 +91,50 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ==========================================
-  // SCROLL PROGRESS
-  // ==========================================
-
-  const scrollProgress = select(".scroll-progress");
-
-  const updateScrollProgress = () => {
-    if (!scrollProgress) return;
-
-    const scrollableHeight =
-      document.documentElement.scrollHeight - window.innerHeight;
-
-    const progress =
-      scrollableHeight > 0
-        ? (window.scrollY / scrollableHeight) * 100
-        : 0;
-
-    scrollProgress.style.width = `${progress}%`;
-  };
 
   // ==========================================
-  // HEADER SCROLL EFFECT
+  // DARK / LIGHT MODE
   // ==========================================
 
-  const header = select(".main-header");
+  const themeToggle = select(".theme-toggle");
 
-  const updateHeader = () => {
-    if (!header) return;
+  const savedTheme = localStorage.getItem("portfolio-theme");
 
-    header.classList.toggle("scrolled", window.scrollY > 50);
-  };
+  const systemTheme = window.matchMedia(
+    "(prefers-color-scheme: dark)"
+  ).matches
+    ? "dark"
+    : "light";
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+
+    localStorage.setItem("portfolio-theme", theme);
+
+    if (themeToggle) {
+      themeToggle.innerHTML =
+        theme === "dark"
+          ? '<i class="fas fa-sun"></i>'
+          : '<i class="fas fa-moon"></i>';
+
+      themeToggle.setAttribute(
+        "aria-label",
+        theme === "dark"
+          ? "Switch to light mode"
+          : "Switch to dark mode"
+      );
+    }
+  }
+
+  applyTheme(savedTheme || systemTheme);
+
+  themeToggle?.addEventListener("click", () => {
+    const currentTheme =
+      document.documentElement.getAttribute("data-theme");
+
+    applyTheme(currentTheme === "dark" ? "light" : "dark");
+  });
+
 
   // ==========================================
   // MOBILE MENU
@@ -120,15 +143,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = select(".menu-toggle");
   const mobileMenu = select(".mobile-menu");
 
-  const closeMobileMenu = () => {
-    if (!mobileMenu) return;
+  function closeMobileMenu() {
+    if (!mobileMenu || !menuToggle) return;
 
     mobileMenu.classList.remove("active");
-    menuToggle?.classList.remove("active");
+    menuToggle.classList.remove("active");
 
-    menuToggle?.setAttribute("aria-expanded", "false");
+    menuToggle.setAttribute("aria-expanded", "false");
+
     document.body.classList.remove("menu-open");
-  };
+  }
 
   if (menuToggle && mobileMenu) {
     menuToggle.setAttribute("aria-expanded", "false");
@@ -137,7 +161,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const isOpen = mobileMenu.classList.toggle("active");
 
       menuToggle.classList.toggle("active", isOpen);
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
+
+      menuToggle.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
 
       document.body.classList.toggle("menu-open", isOpen);
     });
@@ -156,135 +184,15 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeMobileMenu();
-    });
-  }
-
-  // ==========================================
-  // DARK / LIGHT THEME TOGGLE
-  // ==========================================
-
-  const themeToggle = select(".theme-toggle");
-  const savedTheme = localStorage.getItem("portfolio-theme");
-
-  const applyTheme = (theme) => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("portfolio-theme", theme);
-
-    if (themeToggle) {
-      themeToggle.setAttribute(
-        "aria-label",
-        theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
-      );
-
-      themeToggle.innerHTML =
-        theme === "dark"
-          ? '<i class="fas fa-sun"></i>'
-          : '<i class="fas fa-moon"></i>';
-    }
-  };
-
-  const initialTheme =
-    savedTheme ||
-    (window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light");
-
-  applyTheme(initialTheme);
-
-  themeToggle?.addEventListener("click", () => {
-    const currentTheme =
-      document.documentElement.getAttribute("data-theme") || "dark";
-
-    applyTheme(currentTheme === "dark" ? "light" : "dark");
-  });
-
-  // ==========================================
-  // SCROLL REVEAL ANIMATIONS
-  // ==========================================
-
-  const revealElements = selectAll(".reveal");
-
-  if ("IntersectionObserver" in window) {
-    const revealObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      {
-        threshold: 0.12,
-        rootMargin: "0px 0px -40px 0px"
+      if (event.key === "Escape") {
+        closeMobileMenu();
       }
-    );
-
-    revealElements.forEach((element) => {
-      revealObserver.observe(element);
-    });
-  } else {
-    revealElements.forEach((element) => {
-      element.classList.add("visible");
     });
   }
 
-  // ==========================================
-  // ACTIVE NAVIGATION LINK
-  // ==========================================
-
-  const navLinks = selectAll(
-    '.desktop-nav a[href^="#"], .mobile-menu a[href^="#"]'
-  );
-
-  const sections = selectAll("section[id]");
-
-  if ("IntersectionObserver" in window && sections.length) {
-    const sectionObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-
-          const sectionId = entry.target.id;
-
-          navLinks.forEach((link) => {
-            const isActive =
-              link.getAttribute("href") === `#${sectionId}`;
-
-            link.classList.toggle("active", isActive);
-          });
-        });
-      },
-      {
-        rootMargin: "-35% 0px -55% 0px"
-      }
-    );
-
-    sections.forEach((section) => sectionObserver.observe(section));
-  }
 
   // ==========================================
-  // BACK TO TOP BUTTON
-  // ==========================================
-
-  const backToTop = select(".floating-top");
-
-  const updateBackToTop = () => {
-    if (!backToTop) return;
-
-    backToTop.classList.toggle("show", window.scrollY > 500);
-  };
-
-  backToTop?.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-  });
-
-  // ==========================================
-  // SMOOTH SCROLL FOR ANCHOR LINKS
+  // SMOOTH SCROLL
   // ==========================================
 
   selectAll('a[href^="#"]').forEach((link) => {
@@ -308,8 +216,139 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+
   // ==========================================
-  // PROJECT CARD TILT EFFECT
+  // SCROLL PROGRESS
+  // ==========================================
+
+  const scrollProgress = select(".scroll-progress");
+
+  function updateScrollProgress() {
+    if (!scrollProgress) return;
+
+    const scrollHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
+
+    const progress =
+      scrollHeight > 0
+        ? (window.scrollY / scrollHeight) * 100
+        : 0;
+
+    scrollProgress.style.width = `${progress}%`;
+  }
+
+
+  // ==========================================
+  // HEADER SCROLL EFFECT
+  // ==========================================
+
+  const header = select(".main-header");
+
+  function updateHeader() {
+    if (!header) return;
+
+    header.classList.toggle(
+      "scrolled",
+      window.scrollY > 50
+    );
+  }
+
+
+  // ==========================================
+  // BACK TO TOP
+  // ==========================================
+
+  const backToTop = select(".floating-top");
+
+  function updateBackToTop() {
+    if (!backToTop) return;
+
+    backToTop.classList.toggle(
+      "show",
+      window.scrollY > 500
+    );
+  }
+
+  backToTop?.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+
+  // ==========================================
+  // SCROLL REVEAL ANIMATION
+  // ==========================================
+
+  const revealElements = selectAll(".reveal");
+
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -40px 0px"
+      }
+    );
+
+    revealElements.forEach((element) => {
+      revealObserver.observe(element);
+    });
+  } else {
+    revealElements.forEach((element) => {
+      element.classList.add("visible");
+    });
+  }
+
+
+  // ==========================================
+  // ACTIVE NAVIGATION
+  // ==========================================
+
+  const navLinks = selectAll(
+    '.desktop-nav a[href^="#"], .mobile-menu a[href^="#"]'
+  );
+
+  const sections = selectAll("main section[id]");
+
+  if ("IntersectionObserver" in window && sections.length) {
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const sectionId = entry.target.id;
+
+          navLinks.forEach((link) => {
+            const active =
+              link.getAttribute("href") === `#${sectionId}`;
+
+            link.classList.toggle("active", active);
+          });
+        });
+      },
+      {
+        rootMargin: "-35% 0px -55% 0px"
+      }
+    );
+
+    sections.forEach((section) => {
+      sectionObserver.observe(section);
+    });
+  }
+
+
+  // ==========================================
+  // PROJECT CARD TILT
   // ==========================================
 
   const projectCards = selectAll(".project-card");
@@ -322,19 +361,22 @@ document.addEventListener("DOMContentLoaded", () => {
         const x = event.clientX - rect.left;
         const y = event.clientY - rect.top;
 
-        const rotateX = ((y / rect.height) - 0.5) * -8;
-        const rotateY = ((x / rect.width) - 0.5) * 8;
+        const rotateX =
+          ((y / rect.height) - 0.5) * -5;
+
+        const rotateY =
+          ((x / rect.width) - 0.5) * 5;
 
         card.style.transform =
-          `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
       });
 
       card.addEventListener("mouseleave", () => {
-        card.style.transform =
-          "perspective(1000px) rotateX(0deg) rotateY(0deg)";
+        card.style.transform = "";
       });
     });
   }
+
 
   // ==========================================
   // CONTACT FORM VALIDATION
@@ -346,37 +388,90 @@ document.addEventListener("DOMContentLoaded", () => {
     contactForm.addEventListener("submit", (event) => {
       const name = select('[name="name"]', contactForm);
       const email = select('[name="email"]', contactForm);
+      const subject = select('[name="subject"]', contactForm);
       const message = select('[name="message"]', contactForm);
 
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const emailPattern =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
       if (!name?.value.trim()) {
         event.preventDefault();
+
         alert("Please enter your name.");
+
         name?.focus();
+
         return;
       }
 
       if (!emailPattern.test(email?.value.trim() || "")) {
         event.preventDefault();
+
         alert("Please enter a valid email address.");
+
         email?.focus();
+
+        return;
+      }
+
+      if (!subject?.value.trim()) {
+        event.preventDefault();
+
+        alert("Please enter your project subject.");
+
+        subject?.focus();
+
         return;
       }
 
       if (!message?.value.trim()) {
         event.preventDefault();
-        alert("Please enter your message.");
+
+        alert("Please describe your project.");
+
         message?.focus();
+
         return;
       }
 
-      // Form will submit to its configured backend.
+      // Form submits to Formspree endpoint.
+      // Replace YOUR_FORM_ID in index.html first.
     });
   }
 
+
   // ==========================================
-  // CURRENT YEAR
+  // SKILL BAR ANIMATION
+  // ==========================================
+
+  const skillBars = selectAll(".skill-fill");
+
+  if ("IntersectionObserver" in window && skillBars.length) {
+    const skillObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = "running";
+
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.3
+      }
+    );
+
+    skillBars.forEach((bar) => {
+      bar.style.animationPlayState = "paused";
+
+      skillObserver.observe(bar);
+    });
+  }
+
+
+  // ==========================================
+  // AUTOMATIC FOOTER YEAR
   // ==========================================
 
   const yearElement = select("#current-year");
@@ -385,13 +480,14 @@ document.addEventListener("DOMContentLoaded", () => {
     yearElement.textContent = new Date().getFullYear();
   }
 
+
   // ==========================================
   // COMBINED SCROLL HANDLER
   // ==========================================
 
   let ticking = false;
 
-  const handleScroll = () => {
+  function handleScroll() {
     if (ticking) return;
 
     ticking = true;
@@ -403,12 +499,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
       ticking = false;
     });
-  };
+  }
 
-  window.addEventListener("scroll", handleScroll, { passive: true });
+  window.addEventListener("scroll", handleScroll, {
+    passive: true
+  });
 
+  // Initial state
   updateScrollProgress();
   updateHeader();
   updateBackToTop();
+
+
+  // ==========================================
+  // CONSOLE MESSAGE
+  // ==========================================
+
+  console.log(
+    "%cHAMMAD KHALID",
+    "color:#ff6b00;font-size:25px;font-weight:bold;"
+  );
+
+  console.log(
+    "%cPortfolio loaded successfully.",
+    "color:#888;font-size:12px;"
+  );
 
 });
