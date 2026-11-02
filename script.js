@@ -1,539 +1,414 @@
 
-/* =========================================
-   HAMMAD KHALID — PORTFOLIO JAVASCRIPT
-   Three.js + GSAP + ScrollTrigger
-========================================= */
-
 document.addEventListener("DOMContentLoaded", () => {
+  "use strict";
 
-    /* -------------------------------------
-       1. FOOTER CURRENT YEAR
-    ------------------------------------- */
+  // ==========================================
+  // ELEMENT SELECTORS
+  // ==========================================
 
-    const yearElement = document.getElementById("current-year");
+  const select = (selector, parent = document) =>
+    parent.querySelector(selector);
 
-    if (yearElement) {
-        yearElement.textContent = new Date().getFullYear();
-    }
+  const selectAll = (selector, parent = document) =>
+    [...parent.querySelectorAll(selector)];
 
+  // ==========================================
+  // PRELOADER
+  // ==========================================
 
-    /* -------------------------------------
-       2. MOBILE NAVIGATION
-    ------------------------------------- */
+  const preloader = select(".preloader");
 
-    const menuToggle = document.querySelector(".menu-toggle");
-    const navLinks = document.querySelector(".nav-links");
-    const navItems = document.querySelectorAll(".nav-links a");
+  const hidePreloader = () => {
+    if (!preloader) return;
 
-    if (menuToggle && navLinks) {
+    preloader.classList.add("loaded");
 
-        menuToggle.addEventListener("click", () => {
+    setTimeout(() => {
+      preloader.style.display = "none";
+    }, 700);
+  };
 
-            navLinks.classList.toggle("active");
+  window.addEventListener("load", hidePreloader);
 
-            const icon = menuToggle.querySelector("i");
+  // Fallback in case load event has already fired
+  if (document.readyState === "complete") {
+    hidePreloader();
+  }
 
-            if (icon) {
-                icon.classList.toggle("fa-bars");
-                icon.classList.toggle("fa-xmark");
-            }
+  // ==========================================
+  // CUSTOM CURSOR
+  // ==========================================
 
-        });
+  const cursor = select(".cursor");
+  const cursorFollower = select(".cursor-follower");
 
-        navItems.forEach(link => {
+  if (cursor && cursorFollower && window.matchMedia("(pointer: fine)").matches) {
+    let mouseX = 0;
+    let mouseY = 0;
+    let followerX = 0;
+    let followerY = 0;
 
-            link.addEventListener("click", () => {
+    document.addEventListener("mousemove", (event) => {
+      mouseX = event.clientX;
+      mouseY = event.clientY;
 
-                navLinks.classList.remove("active");
-
-                const icon = menuToggle.querySelector("i");
-
-                if (icon) {
-                    icon.classList.add("fa-bars");
-                    icon.classList.remove("fa-xmark");
-                }
-
-            });
-
-        });
-
-        document.addEventListener("click", event => {
-
-            if (
-                !navLinks.contains(event.target) &&
-                !menuToggle.contains(event.target)
-            ) {
-                navLinks.classList.remove("active");
-
-                const icon = menuToggle.querySelector("i");
-
-                if (icon) {
-                    icon.classList.add("fa-bars");
-                    icon.classList.remove("fa-xmark");
-                }
-            }
-
-        });
-
-    }
-
-
-    /* -------------------------------------
-       3. ACTIVE NAVIGATION ON SCROLL
-    ------------------------------------- */
-
-    const sections = document.querySelectorAll("main section[id]");
-
-    function updateActiveNavigation() {
-
-        let currentSection = "";
-
-        sections.forEach(section => {
-
-            const sectionTop = section.offsetTop - 150;
-            const sectionBottom = sectionTop + section.offsetHeight;
-
-            if (
-                window.scrollY >= sectionTop &&
-                window.scrollY < sectionBottom
-            ) {
-                currentSection = section.getAttribute("id");
-            }
-
-        });
-
-        navItems.forEach(link => {
-
-            link.classList.remove("active");
-
-            if (link.getAttribute("href") === `#${currentSection}`) {
-                link.classList.add("active");
-            }
-
-        });
-
-    }
-
-    window.addEventListener("scroll", updateActiveNavigation, {
-        passive: true
+      cursor.style.left = `${mouseX}px`;
+      cursor.style.top = `${mouseY}px`;
     });
 
-    updateActiveNavigation();
+    const animateFollower = () => {
+      followerX += (mouseX - followerX) * 0.15;
+      followerY += (mouseY - followerY) * 0.15;
 
+      cursorFollower.style.left = `${followerX}px`;
+      cursorFollower.style.top = `${followerY}px`;
 
-    /* -------------------------------------
-       4. SMOOTH SCROLL
-    ------------------------------------- */
+      requestAnimationFrame(animateFollower);
+    };
 
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    animateFollower();
 
-        anchor.addEventListener("click", event => {
+    selectAll("a, button, input, textarea, .project-card").forEach((element) => {
+      element.addEventListener("mouseenter", () => {
+        cursor.classList.add("cursor-hover");
+        cursorFollower.classList.add("cursor-hover");
+      });
 
-            const targetId = anchor.getAttribute("href");
+      element.addEventListener("mouseleave", () => {
+        cursor.classList.remove("cursor-hover");
+        cursorFollower.classList.remove("cursor-hover");
+      });
+    });
+  }
 
-            if (!targetId || targetId === "#") return;
+  // ==========================================
+  // SCROLL PROGRESS
+  // ==========================================
 
-            const target = document.querySelector(targetId);
+  const scrollProgress = select(".scroll-progress");
 
-            if (target) {
+  const updateScrollProgress = () => {
+    if (!scrollProgress) return;
 
-                event.preventDefault();
+    const scrollableHeight =
+      document.documentElement.scrollHeight - window.innerHeight;
 
-                target.scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
+    const progress =
+      scrollableHeight > 0
+        ? (window.scrollY / scrollableHeight) * 100
+        : 0;
 
-            }
+    scrollProgress.style.width = `${progress}%`;
+  };
 
-        });
+  // ==========================================
+  // HEADER SCROLL EFFECT
+  // ==========================================
 
+  const header = select(".main-header");
+
+  const updateHeader = () => {
+    if (!header) return;
+
+    header.classList.toggle("scrolled", window.scrollY > 50);
+  };
+
+  // ==========================================
+  // MOBILE MENU
+  // ==========================================
+
+  const menuToggle = select(".menu-toggle");
+  const mobileMenu = select(".mobile-menu");
+
+  const closeMobileMenu = () => {
+    if (!mobileMenu) return;
+
+    mobileMenu.classList.remove("active");
+    menuToggle?.classList.remove("active");
+
+    menuToggle?.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("menu-open");
+  };
+
+  if (menuToggle && mobileMenu) {
+    menuToggle.setAttribute("aria-expanded", "false");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = mobileMenu.classList.toggle("active");
+
+      menuToggle.classList.toggle("active", isOpen);
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+
+      document.body.classList.toggle("menu-open", isOpen);
     });
 
-
-    /* -------------------------------------
-       5. GSAP ANIMATIONS
-    ------------------------------------- */
-
-    if (window.gsap) {
-
-        if (window.ScrollTrigger) {
-            gsap.registerPlugin(ScrollTrigger);
-        }
-
-        // Hero entrance animation
-        const heroTimeline = gsap.timeline({
-            defaults: {
-                ease: "power3.out"
-            }
-        });
-
-        heroTimeline
-            .from(".availability", {
-                opacity: 0,
-                y: 20,
-                duration: 0.7
-            })
-            .from(".hero-intro", {
-                opacity: 0,
-                y: 20,
-                duration: 0.6
-            }, "-=0.4")
-            .from(".hero h1", {
-                opacity: 0,
-                y: 40,
-                duration: 0.9
-            }, "-=0.3")
-            .from(".hero-description", {
-                opacity: 0,
-                y: 20,
-                duration: 0.7
-            }, "-=0.5")
-            .from(".hero-buttons .btn", {
-                opacity: 0,
-                y: 20,
-                stagger: 0.15,
-                duration: 0.6
-            }, "-=0.4")
-            .from(".hero-socials a", {
-                opacity: 0,
-                scale: 0.5,
-                stagger: 0.1,
-                duration: 0.5
-            }, "-=0.3")
-            .from(".hero-visual", {
-                opacity: 0,
-                scale: 0.8,
-                x: 50,
-                duration: 1
-            }, "-=1");
-
-
-        // Scroll reveal animations
-        if (window.ScrollTrigger) {
-
-            const revealElements = document.querySelectorAll(
-                ".section-heading, .about-image, .about-content, " +
-                ".service-card, .project-card, .skill-item, " +
-                ".process-item, .contact-content, .contact-action"
-            );
-
-            revealElements.forEach(element => {
-
-                gsap.from(element, {
-                    opacity: 0,
-                    y: 45,
-                    duration: 0.9,
-                    ease: "power3.out",
-                    scrollTrigger: {
-                        trigger: element,
-                        start: "top 88%",
-                        toggleActions: "play none none reverse"
-                    }
-                });
-
-            });
-
-            // Project cards stagger
-            gsap.from(".project-card", {
-                opacity: 0,
-                y: 50,
-                stagger: 0.2,
-                duration: 0.8,
-                ease: "power3.out",
-                scrollTrigger: {
-                    trigger: ".projects-grid",
-                    start: "top 85%"
-                }
-            });
-
-            // Skills stagger
-            gsap.from(".skill-item", {
-                opacity: 0,
-                scale: 0.85,
-                stagger: 0.1,
-                duration: 0.6,
-                scrollTrigger: {
-                    trigger: ".skills-grid",
-                    start: "top 85%"
-                }
-            });
-
-        }
-
-    } else {
-
-        console.warn("GSAP could not be loaded.");
-
-    }
-
-
-    /* -------------------------------------
-       6. 3D HERO CARD INTERACTION
-    ------------------------------------- */
-
-    const heroVisual = document.querySelector(".hero-visual");
-    const visualCard = document.querySelector(".visual-card");
-
-    if (
-        heroVisual &&
-        visualCard &&
-        window.matchMedia("(pointer: fine)").matches
-    ) {
-
-        heroVisual.addEventListener("mousemove", event => {
-
-            const rect = heroVisual.getBoundingClientRect();
-
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
-
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateY = ((x - centerX) / centerX) * 12;
-            const rotateX = ((centerY - y) / centerY) * 12;
-
-            visualCard.style.animation = "none";
-
-            visualCard.style.transform =
-                `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-
-        });
-
-        heroVisual.addEventListener("mouseleave", () => {
-
-            visualCard.style.animation = "";
-            visualCard.style.transform = "";
-
-        });
-
-    }
-
-
-    /* -------------------------------------
-       7. THREE.JS 3D BACKGROUND
-    ------------------------------------- */
-
-    const hero3D = document.getElementById("hero3D");
-
-    if (hero3D && window.THREE) {
-
-        let scene;
-        let camera;
-        let renderer;
-        let particles;
-        let animationFrame;
-
-        try {
-
-            scene = new THREE.Scene();
-
-            camera = new THREE.PerspectiveCamera(
-                60,
-                hero3D.clientWidth / hero3D.clientHeight,
-                0.1,
-                1000
-            );
-
-            camera.position.z = 5;
-
-            renderer = new THREE.WebGLRenderer({
-                alpha: true,
-                antialias: true
-            });
-
-            renderer.setPixelRatio(
-                Math.min(window.devicePixelRatio, 2)
-            );
-
-            renderer.setSize(
-                hero3D.clientWidth,
-                hero3D.clientHeight
-            );
-
-            renderer.domElement.style.position = "absolute";
-            renderer.domElement.style.inset = "0";
-            renderer.domElement.style.width = "100%";
-            renderer.domElement.style.height = "100%";
-            renderer.domElement.style.pointerEvents = "none";
-            renderer.domElement.style.zIndex = "1";
-
-            hero3D.appendChild(renderer.domElement);
-
-            // Particle geometry
-            const particleCount = 900;
-
-            const positions = new Float32Array(
-                particleCount * 3
-            );
-
-            for (let i = 0; i < particleCount; i++) {
-
-                const i3 = i * 3;
-
-                positions[i3] = (Math.random() - 0.5) * 9;
-                positions[i3 + 1] = (Math.random() - 0.5) * 9;
-                positions[i3 + 2] = (Math.random() - 0.5) * 5;
-
-            }
-
-            const geometry = new THREE.BufferGeometry();
-
-            geometry.setAttribute(
-                "position",
-                new THREE.BufferAttribute(positions, 3)
-            );
-
-            const material = new THREE.PointsMaterial({
-                color: 0xff6b2c,
-                size: 0.018,
-                transparent: true,
-                opacity: 0.65,
-                sizeAttenuation: true
-            });
-
-            particles = new THREE.Points(
-                geometry,
-                material
-            );
-
-            scene.add(particles);
-
-            // Animation loop
-            const clock = new THREE.Clock();
-
-            function animate() {
-
-                animationFrame = requestAnimationFrame(animate);
-
-                const elapsed = clock.getElapsedTime();
-
-                particles.rotation.y = elapsed * 0.035;
-                particles.rotation.x = Math.sin(elapsed * 0.2) * 0.08;
-
-                renderer.render(scene, camera);
-
-            }
-
-            animate();
-
-            // Responsive resize
-            const resizeObserver = new ResizeObserver(() => {
-
-                const width = hero3D.clientWidth;
-                const height = hero3D.clientHeight;
-
-                if (!width || !height) return;
-
-                camera.aspect = width / height;
-                camera.updateProjectionMatrix();
-
-                renderer.setSize(width, height);
-
-            });
-
-            resizeObserver.observe(hero3D);
-
-            // Cleanup if page is unloaded
-            window.addEventListener("beforeunload", () => {
-
-                cancelAnimationFrame(animationFrame);
-
-                resizeObserver.disconnect();
-
-                geometry.dispose();
-                material.dispose();
-                renderer.dispose();
-
-            });
-
-        } catch (error) {
-
-            console.error("Three.js initialization failed:", error);
-
-        }
-
-    } else {
-
-        console.warn("Three.js could not be loaded.");
-
-    }
-
-
-    /* -------------------------------------
-       8. SERVICE CARD HOVER EFFECT
-    ------------------------------------- */
-
-    document.querySelectorAll(".service-card").forEach(card => {
-
-        card.addEventListener("mousemove", event => {
-
-            const rect = card.getBoundingClientRect();
-
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
-
-            card.style.background =
-                `radial-gradient(circle at ${x}px ${y}px, rgba(255,107,44,0.09), #14151c 65%)`;
-
-        });
-
-        card.addEventListener("mouseleave", () => {
-
-            card.style.background = "";
-
-        });
-
+    selectAll("a", mobileMenu).forEach((link) => {
+      link.addEventListener("click", closeMobileMenu);
     });
 
-
-    /* -------------------------------------
-       9. PROJECT CARD TILT EFFECT
-    ------------------------------------- */
-
-    document.querySelectorAll(".project-card").forEach(card => {
-
-        card.addEventListener("mousemove", event => {
-
-            if (!window.matchMedia("(pointer: fine)").matches) return;
-
-            const rect = card.getBoundingClientRect();
-
-            const x = event.clientX - rect.left;
-            const y = event.clientY - rect.top;
-
-            const rotateY = ((x / rect.width) - 0.5) * 8;
-            const rotateX = (0.5 - (y / rect.height)) * 8;
-
-            card.style.transform =
-                `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-
-        });
-
-        card.addEventListener("mouseleave", () => {
-
-            card.style.transform = "";
-
-        });
-
+    document.addEventListener("click", (event) => {
+      if (
+        !mobileMenu.contains(event.target) &&
+        !menuToggle.contains(event.target)
+      ) {
+        closeMobileMenu();
+      }
     });
 
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMobileMenu();
+    });
+  }
 
-    /* -------------------------------------
-       10. PAGE LOADED
-    ------------------------------------- */
+  // ==========================================
+  // DARK / LIGHT THEME TOGGLE
+  // ==========================================
 
-    document.body.classList.add("page-loaded");
+  const themeToggle = select(".theme-toggle");
+  const savedTheme = localStorage.getItem("portfolio-theme");
 
-    console.log(
-        "%cHammad Khalid Portfolio",
-        "color:#ff6b2c;font-size:18px;font-weight:bold;"
+  const applyTheme = (theme) => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("portfolio-theme", theme);
+
+    if (themeToggle) {
+      themeToggle.setAttribute(
+        "aria-label",
+        theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+      );
+
+      themeToggle.innerHTML =
+        theme === "dark"
+          ? '<i class="fas fa-sun"></i>'
+          : '<i class="fas fa-moon"></i>';
+    }
+  };
+
+  const initialTheme =
+    savedTheme ||
+    (window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light");
+
+  applyTheme(initialTheme);
+
+  themeToggle?.addEventListener("click", () => {
+    const currentTheme =
+      document.documentElement.getAttribute("data-theme") || "dark";
+
+    applyTheme(currentTheme === "dark" ? "light" : "dark");
+  });
+
+  // ==========================================
+  // SCROLL REVEAL ANIMATIONS
+  // ==========================================
+
+  const revealElements = selectAll(".reveal");
+
+  if ("IntersectionObserver" in window) {
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: "0px 0px -40px 0px"
+      }
     );
 
-    console.log(
-        "%cWordPress Developer | 3+ Years Experience",
-        "color:#999;font-size:12px;"
+    revealElements.forEach((element) => {
+      revealObserver.observe(element);
+    });
+  } else {
+    revealElements.forEach((element) => {
+      element.classList.add("visible");
+    });
+  }
+
+  // ==========================================
+  // ACTIVE NAVIGATION LINK
+  // ==========================================
+
+  const navLinks = selectAll(
+    '.desktop-nav a[href^="#"], .mobile-menu a[href^="#"]'
+  );
+
+  const sections = selectAll("section[id]");
+
+  if ("IntersectionObserver" in window && sections.length) {
+    const sectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          const sectionId = entry.target.id;
+
+          navLinks.forEach((link) => {
+            const isActive =
+              link.getAttribute("href") === `#${sectionId}`;
+
+            link.classList.toggle("active", isActive);
+          });
+        });
+      },
+      {
+        rootMargin: "-35% 0px -55% 0px"
+      }
     );
+
+    sections.forEach((section) => sectionObserver.observe(section));
+  }
+
+  // ==========================================
+  // BACK TO TOP BUTTON
+  // ==========================================
+
+  const backToTop = select(".floating-top");
+
+  const updateBackToTop = () => {
+    if (!backToTop) return;
+
+    backToTop.classList.toggle("show", window.scrollY > 500);
+  };
+
+  backToTop?.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  });
+
+  // ==========================================
+  // SMOOTH SCROLL FOR ANCHOR LINKS
+  // ==========================================
+
+  selectAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener("click", (event) => {
+      const targetId = link.getAttribute("href");
+
+      if (!targetId || targetId === "#") return;
+
+      const target = select(targetId);
+
+      if (!target) return;
+
+      event.preventDefault();
+
+      target.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+
+      closeMobileMenu();
+    });
+  });
+
+  // ==========================================
+  // PROJECT CARD TILT EFFECT
+  // ==========================================
+
+  const projectCards = selectAll(".project-card");
+
+  if (window.matchMedia("(pointer: fine)").matches) {
+    projectCards.forEach((card) => {
+      card.addEventListener("mousemove", (event) => {
+        const rect = card.getBoundingClientRect();
+
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+
+        const rotateX = ((y / rect.height) - 0.5) * -8;
+        const rotateY = ((x / rect.width) - 0.5) * 8;
+
+        card.style.transform =
+          `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.transform =
+          "perspective(1000px) rotateX(0deg) rotateY(0deg)";
+      });
+    });
+  }
+
+  // ==========================================
+  // CONTACT FORM VALIDATION
+  // ==========================================
+
+  const contactForm = select(".contact-form");
+
+  if (contactForm) {
+    contactForm.addEventListener("submit", (event) => {
+      const name = select('[name="name"]', contactForm);
+      const email = select('[name="email"]', contactForm);
+      const message = select('[name="message"]', contactForm);
+
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!name?.value.trim()) {
+        event.preventDefault();
+        alert("Please enter your name.");
+        name?.focus();
+        return;
+      }
+
+      if (!emailPattern.test(email?.value.trim() || "")) {
+        event.preventDefault();
+        alert("Please enter a valid email address.");
+        email?.focus();
+        return;
+      }
+
+      if (!message?.value.trim()) {
+        event.preventDefault();
+        alert("Please enter your message.");
+        message?.focus();
+        return;
+      }
+
+      // Form will submit to its configured backend.
+    });
+  }
+
+  // ==========================================
+  // CURRENT YEAR
+  // ==========================================
+
+  const yearElement = select("#current-year");
+
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
+
+  // ==========================================
+  // COMBINED SCROLL HANDLER
+  // ==========================================
+
+  let ticking = false;
+
+  const handleScroll = () => {
+    if (ticking) return;
+
+    ticking = true;
+
+    requestAnimationFrame(() => {
+      updateScrollProgress();
+      updateHeader();
+      updateBackToTop();
+
+      ticking = false;
+    });
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+
+  updateScrollProgress();
+  updateHeader();
+  updateBackToTop();
 
 });
