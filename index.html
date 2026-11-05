@@ -1,525 +1,322 @@
+
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#0b0d10">
-    <meta name="description" content="Hammad Khalid — WordPress Developer & Custom Coder">
-    <title>Hammad Khalid | WordPress Developer</title>
+    <meta name="description" content="Hammad Khalid — Professional Web Developer, WordPress Expert and Digital Creator.">
+    <meta name="theme-color" content="#080808">
+
+    <title>Hammad Khalid | Creative Web Developer</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <!-- EmailJS -->
-    <script defer src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <!-- JavaScript -->
-    <script defer src="js/script.js"></script>
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Main JavaScript -->
+    <script src="script.js" defer></script>
 </head>
 
 <body>
 
+    <!-- PAGE LOADER -->
+    <div class="preloader">
+        <div class="loader-content">
+            <div class="loader-logo">HK<span>.</span></div>
+            <div class="loader-line"></div>
+            <p>CREATING DIGITAL EXPERIENCES</p>
+        </div>
+    </div>
+
+    <!-- SCROLL PROGRESS -->
+    <div class="scroll-progress"></div>
+
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+
     <!-- HEADER -->
-    <header class="site-header">
+    <header class="main-header">
 
-        <a class="brand" href="#home">
-            <span class="brand-mark">HK</span>
-            <span>hammad<span class="brand-dot">.</span></span>
-        </a>
+        <div class="header-inner">
 
-        <nav class="desktop-nav">
-            <a href="#about">About</a>
-            <a href="#services">Services</a>
-            <a href="#work">Work</a>
-            <a href="#contact">Contact</a>
-        </nav>
-
-        <div class="header-actions">
-
-            <button class="theme-toggle" id="themeToggle" aria-label="Switch theme">
-                <span class="theme-icon">☼</span>
-            </button>
-
-            <a class="button button-small button-outline header-cta" href="#contact">
-                Let's talk ↗
+            <a href="#home" class="logo">
+                HK<span>.</span>
             </a>
 
-            <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
-                <span></span>
-                <span></span>
-            </button>
+            <nav class="desktop-nav">
+                <a href="#home" class="active">Home</a>
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#skills">Skills</a>
+                <a href="#experience">Experience</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </nav>
+
+            <div class="header-actions">
+
+                <button class="theme-toggle" aria-label="Toggle theme">
+                    <i class="fas fa-sun"></i>
+                </button>
+
+                <a href="#contact" class="header-cta">
+                    Let's Talk
+                    <i class="fas fa-arrow-up-right-from-square"></i>
+                </a>
+
+                <button class="menu-toggle" aria-label="Open menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                </button>
+
+            </div>
 
         </div>
+
+        <!-- MOBILE NAVIGATION -->
+        <div class="mobile-menu">
+            <a href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#skills">Skills</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+
     </header>
 
 
     <main>
 
-        <!-- HERO SECTION -->
-        <section class="hero section-wrap" id="home">
+        <!-- =================================
+             HERO SECTION
+        ================================== -->
+        <section class="hero" id="home">
 
-            <div class="hero-copy reveal">
+            <div class="hero-background">
+                <div class="hero-grid"></div>
+                <div class="hero-glow glow-one"></div>
+                <div class="hero-glow glow-two"></div>
+                <div class="hero-glow glow-three"></div>
+            </div>
 
-                <div class="eyebrow">
-                    <span class="status-dot"></span>
-                    AVAILABLE FOR SELECT PROJECTS
+            <div class="hero-container">
+
+                <!-- HERO CONTENT -->
+                <div class="hero-content reveal">
+
+                    <div class="availability">
+                        <span class="availability-dot"></span>
+                        AVAILABLE FOR NEW PROJECTS
+                    </div>
+
+                    <p class="hero-intro">
+                        HELLO, I'M HAMMAD KHALID
+                    </p>
+
+                    <h1>
+                        I CREATE
+                        <span class="outline-text">DIGITAL</span>
+                        EXPERIENCES
+                        THAT
+                        <span class="orange-text">MATTER.</span>
+                    </h1>
+
+                    <h2 class="hero-subheading">
+                        WordPress Developer
+                        <span class="orange-text">&</span>
+                        Digital Creator
+                    </h2>
+
+                    <p class="hero-description">
+                        I design and develop modern, high-performance
+                        websites that help businesses grow, connect
+                        with customers and build a powerful online presence.
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <a href="#projects" class="btn-primary">
+                            Explore My Work
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+
+                        <a href="#contact" class="btn-secondary">
+                            Let's Collaborate
+                            <i class="fas fa-arrow-up-right-from-square"></i>
+                        </a>
+
+                    </div>
+
+                    <!-- HERO STATS -->
+                    <div class="hero-stats">
+
+                        <div class="stat-item">
+                            <h3>4<span>+</span></h3>
+                            <p>Years Experience</p>
+                        </div>
+
+                        <div class="stat-item">
+                            <h3>100<span>%</span></h3>
+                            <p>Commitment</p>
+                        </div>
+
+                        <div class="stat-item">
+                            <h3>24<span>/7</span></h3>
+                            <p>Creative Thinking</p>
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <p class="hero-kicker">
-                    WORDPRESS DEVELOPER · CUSTOM CODER
-                </p>
 
-                <h1>
-                    I build digital<br>
-                    experiences that<br>
-                    <span class="gradient-text">work beautifully.</span>
-                </h1>
+                <!-- PROFESSIONAL MALE AVATAR -->
+                <div class="hero-visual reveal">
 
-                <p class="hero-description">
-                    I'm Hammad Khalid — I turn ideas into fast, modern
-                    and easy-to-manage WordPress websites, with custom
-                    code where it matters.
-                </p>
+                    <div class="avatar-orbit orbit-one"></div>
+                    <div class="avatar-orbit orbit-two"></div>
 
-                <div class="hero-actions">
+                    <div class="avatar-glow"></div>
 
-                    <a class="button button-primary" href="#work">
-                        Explore my work ↗
-                    </a>
+                    <div class="avatar-card">
 
-                    <a class="text-link" href="#contact">
-                        Have a project in mind? →
-                    </a>
+                        <div class="avatar-top">
+                            <span>CREATIVE DEVELOPER</span>
+                            <span class="avatar-status"></span>
+                        </div>
 
-                </div>
+                        <!--
+                          Replace this image with your generated
+                          professional 3D male avatar:
+                          images/hammad-avatar.png
+                        -->
+                        <img
+                            src="images/hammad-avatar.jpeg" alt="Hammad Khalid Avatar"
+                            class="avatar-image"
+                            fetchpriority="high"
+                        >
 
-                <div class="hero-meta">
-                    <span>BASED IN PAKISTAN</span>
-                    <span class="meta-line"></span>
-                    <span>WORKING WORLDWIDE</span>
+                        <div class="avatar-bottom">
+
+                            <div>
+                                <h3>Hammad Khalid</h3>
+                                <p>Web Developer & Digital Creator</p>
+                            </div>
+
+                            <span class="avatar-symbol">HK.</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FLOATING WORDPRESS CARD -->
+                    <div class="floating-card floating-card-one">
+                        <i class="fab fa-wordpress"></i>
+                        <div>
+                            <strong>WordPress</strong>
+                            <span>Development Expert</span>
+                        </div>
+                    </div>
+
+
+                    <!-- FLOATING CODE CARD -->
+                    <div class="floating-card floating-card-two">
+                        <i class="fas fa-code"></i>
+                        <div>
+                            <strong>Clean Code</strong>
+                            <span>Modern Development</span>
+                        </div>
+                    </div>
+
+
+                    <!-- FLOATING EXPERIENCE CARD -->
+                    <div class="floating-card floating-card-three">
+                        <i class="fas fa-award"></i>
+                        <div>
+                            <strong>4+ Years</strong>
+                            <span>Professional Experience</span>
+                        </div>
+                    </div>
+
                 </div>
 
             </div>
 
 
-            <div class="hero-visual reveal">
-
-                <div class="visual-orbit orbit-one"></div>
-                <div class="visual-orbit orbit-two"></div>
-                <div class="visual-glow"></div>
-
-                <div class="portrait-frame">
-
-                    <img
-                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=85"
-                        alt="Professional developer avatar"
-                        class="portrait"
-                    >
-
-                    <div class="portrait-shade"></div>
-
-                    <div class="portrait-caption">
-                        <span class="caption-label">THE DEVELOPER</span>
-                        <strong>Hammad Khalid</strong>
-                        <span>WordPress · Custom Code</span>
-                    </div>
-
-                </div>
-
-                <div class="float-card float-code">
-                    <span class="float-icon">&lt;/&gt;</span>
-                    <div>
-                        <strong>Clean code</strong>
-                        <small>Built with purpose</small>
-                    </div>
-                </div>
-
-                <div class="float-card float-speed">
-                    <span class="speed-ring">↗</span>
-                    <div>
-                        <strong>Performance first</strong>
-                        <small>Speed meets experience</small>
-                    </div>
-                </div>
-
-                <div class="hero-index">01 <span>/</span> 04</div>
-
-            </div>
-
+            <!-- HERO FOOTER -->
             <div class="hero-bottom">
-                <span>SCROLL TO DISCOVER</span>
-                <span class="scroll-line"></span>
-                <span>01 — INTRODUCTION</span>
-            </div>
-
-        </section>
-
-
-        <!-- SKILLS MARQUEE -->
-        <section class="marquee-band">
-
-            <div class="marquee-track">
-                <span>WORDPRESS</span>
-                <i>✳</i>
-                <span>ELEMENTOR</span>
-                <i>✳</i>
-                <span>PHP</span>
-                <i>✳</i>
-                <span>JAVASCRIPT</span>
-                <i>✳</i>
-                <span>CSS</span>
-                <i>✳</i>
-                <span>WORDPRESS</span>
-                <i>✳</i>
-                <span>ELEMENTOR</span>
-                <i>✳</i>
-                <span>PHP</span>
-                <i>✳</i>
-                <span>JAVASCRIPT</span>
-                <i>✳</i>
-                <span>CSS</span>
-            </div>
-
-        </section>
-
-
-        <!-- ABOUT SECTION -->
-        <section class="about section-wrap section-space" id="about">
-
-            <div class="section-heading reveal">
-                <p class="section-label">01 / ABOUT ME</p>
-
-                <h2>
-                    Good websites don't<br>
-                    happen <span class="muted">by accident.</span>
-                </h2>
-            </div>
-
-            <div class="about-grid">
-
-                <div class="about-copy reveal">
-
-                    <p class="lead">
-                        They happen when thoughtful design meets dependable development.
-                    </p>
-
-                    <p>
-                        I'm a WordPress developer and custom coder focused on
-                        creating websites that look considered, feel effortless
-                        and support real business goals.
-                    </p>
-
-                    <p>
-                        I combine the flexibility of WordPress with custom
-                        HTML, CSS, JavaScript and PHP to build beyond
-                        off-the-shelf templates.
-                    </p>
-
-                    <a class="text-link" href="#contact">
-                        Let's make something useful ↗
-                    </a>
-
-                </div>
-
-                <div class="about-stats reveal">
-
-                    <div class="stat-card">
-                        <strong>01</strong>
-                        <span>Thoughtful<br>execution</span>
-                    </div>
-
-                    <div class="stat-card">
-                        <strong>02</strong>
-                        <span>Clean custom<br>development</span>
-                    </div>
-
-                    <div class="stat-card">
-                        <strong>03</strong>
-                        <span>Responsive<br>by default</span>
-                    </div>
-
-                    <div class="stat-note">
-                        A practical blend of creativity, clarity and code.
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- SERVICES -->
-        <section class="services section-wrap section-space" id="services">
-
-            <div class="section-heading reveal">
-                <p class="section-label">02 / WHAT I DO</p>
-
-                <h2>
-                    From first sketch<br>
-                    to <span class="muted">final pixel.</span>
-                </h2>
-            </div>
-
-            <div class="service-list">
-
-                <article class="service-item reveal">
-                    <span class="service-number">01</span>
-                    <div>
-                        <h3>WordPress Development</h3>
-                        <p>
-                            Flexible, manageable WordPress websites tailored
-                            to your brand, content and goals.
-                        </p>
-                    </div>
-                    <span class="service-arrow">↗</span>
-                </article>
-
-                <article class="service-item reveal">
-                    <span class="service-number">02</span>
-                    <div>
-                        <h3>Custom Coding</h3>
-                        <p>
-                            Custom HTML, CSS, JavaScript and PHP to create
-                            the functionality your project needs.
-                        </p>
-                    </div>
-                    <span class="service-arrow">↗</span>
-                </article>
-
-                <article class="service-item reveal">
-                    <span class="service-number">03</span>
-                    <div>
-                        <h3>Landing Pages & UI</h3>
-                        <p>
-                            Responsive landing pages with strong hierarchy
-                            and a smooth user experience.
-                        </p>
-                    </div>
-                    <span class="service-arrow">↗</span>
-                </article>
-
-                <article class="service-item reveal">
-                    <span class="service-number">04</span>
-                    <div>
-                        <h3>Optimization & Care</h3>
-                        <p>
-                            Improvements to responsiveness, performance,
-                            usability and website quality.
-                        </p>
-                    </div>
-                    <span class="service-arrow">↗</span>
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- PROJECTS -->
-        <section class="work section-wrap section-space" id="work">
-
-            <div class="work-heading reveal">
-
-                <div class="section-heading">
-                    <p class="section-label">03 / SELECTED WORK</p>
-
-                    <h2>
-                        Made to make<br>
-                        <span class="muted">an impression.</span>
-                    </h2>
-                </div>
-
-                <p class="work-intro">
-                    A selection of web design concepts and development
-                    projects showcasing creativity and technical skills.
-                </p>
-
-            </div>
-
-
-            <div class="project-grid">
-
-                <a class="project-card project-large reveal" href="#contact">
-
-                    <div class="project-image">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=85"
-                            alt="Business website project"
-                            loading="lazy"
-                        >
-
-                        <span class="project-open">↗</span>
-
-                    </div>
-
-                    <div class="project-info">
-                        <div>
-                            <h3>Business Growth Website</h3>
-                            <p>WordPress · Landing page · Responsive UI</p>
-                        </div>
-                        <span>01</span>
-                    </div>
-
-                </a>
-
-
-                <a class="project-card reveal" href="#contact">
-
-                    <div class="project-image">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=85"
-                            alt="Creative studio website"
-                            loading="lazy"
-                        >
-
-                        <span class="project-open">↗</span>
-
-                    </div>
-
-                    <div class="project-info">
-                        <div>
-                            <h3>Creative Studio</h3>
-                            <p>Custom UI · WordPress</p>
-                        </div>
-                        <span>02</span>
-                    </div>
-
-                </a>
-
-
-                <a class="project-card reveal" href="#contact">
-
-                    <div class="project-image">
-
-                        <img
-                            src="https://images.unsplash.com/photo-1559028006-448665bd7c7f?auto=format&fit=crop&w=1200&q=85"
-                            alt="Modern digital experience"
-                            loading="lazy"
-                        >
-
-                        <span class="project-open">↗</span>
-
-                    </div>
-
-                    <div class="project-info">
-                        <div>
-                            <h3>Digital Experience</h3>
-                            <p>Web design · Custom code</p>
-                        </div>
-                        <span>03</span>
-                    </div>
-
-                </a>
-
-            </div>
-
-        </section>
-
-
-        <!-- VIDEO SECTION -->
-        <section class="visual-break section-wrap reveal">
-
-            <div class="video-shell">
-
-                <video
-                    class="ambient-video"
-                    autoplay
-                    muted
-                    loop
-                    playsinline
-                    poster="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1800&q=80"
-                >
-                    <source
-                        src="https://videos.pexels.com/video-files/3130284/3130284-hd_1920_1080_30fps.mp4"
-                        type="video/mp4"
-                    >
-                </video>
-
-                <div class="video-overlay"></div>
-
-                <div class="video-content">
-
-                    <p class="section-label">THE WAY I WORK</p>
-
-                    <h2>
-                        Less noise.<br>
-                        <span>More intention.</span>
-                    </h2>
-
-                    <p>
-                        Thoughtful details. Solid foundations.
-                        Websites made for people.
-                    </p>
-
-                </div>
-
-                <span class="video-corner">
-                    DESIGN × DEVELOPMENT
+                <span class="scroll-icon">
+                    <i class="fas fa-computer-mouse"></i>
                 </span>
 
+                <span>SCROLL TO EXPLORE</span>
+
+                <div class="scroll-line"></div>
+
+                <span>01 / 07</span>
             </div>
 
         </section>
 
 
-        <!-- PROCESS -->
-        <section class="process section-wrap section-space">
+        <!-- =================================
+             TECHNOLOGY MARQUEE
+        ================================== -->
+        <section class="marquee-section">
 
-            <div class="section-heading reveal">
+            <div class="marquee-track">
 
-                <p class="section-label">04 / THE PROCESS</p>
+                <div class="marquee-content">
+                    <span>WORDPRESS DEVELOPMENT</span>
+                    <i class="fas fa-asterisk"></i>
 
-                <h2>
-                    Clear steps.<br>
-                    <span class="muted">Better outcomes.</span>
-                </h2>
+                    <span>WEB DESIGN</span>
+                    <i class="fas fa-asterisk"></i>
 
-            </div>
+                    <span>ECOMMERCE</span>
+                    <i class="fas fa-asterisk"></i>
 
-            <div class="process-grid">
+                    <span>HTML & CSS</span>
+                    <i class="fas fa-asterisk"></i>
 
-                <div class="process-step reveal">
-                    <span>01</span>
-                    <h3>Discover</h3>
-                    <p>
-                        We define the goal, audience, content and
-                        essential functionality.
-                    </p>
+                    <span>JAVASCRIPT</span>
+                    <i class="fas fa-asterisk"></i>
+
+                    <span>SEO OPTIMIZATION</span>
+                    <i class="fas fa-asterisk"></i>
                 </div>
 
-                <div class="process-step reveal">
-                    <span>02</span>
-                    <h3>Design</h3>
-                    <p>
-                        We shape a visual direction and a user journey
-                        that feels natural.
-                    </p>
-                </div>
+                <div class="marquee-content" aria-hidden="true">
+                    <span>WORDPRESS DEVELOPMENT</span>
+                    <i class="fas fa-asterisk"></i>
 
-                <div class="process-step reveal">
-                    <span>03</span>
-                    <h3>Develop</h3>
-                    <p>
-                        I build responsively, test the details and
-                        refine the experience.
-                    </p>
-                </div>
+                    <span>WEB DESIGN</span>
+                    <i class="fas fa-asterisk"></i>
 
-                <div class="process-step reveal">
-                    <span>04</span>
-                    <h3>Deliver</h3>
-                    <p>
-                        We review, launch and make sure you know
-                        how to manage your site.
-                    </p>
+                    <span>ECOMMERCE</span>
+                    <i class="fas fa-asterisk"></i>
+
+                    <span>HTML & CSS</span>
+                    <i class="fas fa-asterisk"></i>
+
+                    <span>JAVASCRIPT</span>
+                    <i class="fas fa-asterisk"></i>
+
+                    <span>SEO OPTIMIZATION</span>
+                    <i class="fas fa-asterisk"></i>
                 </div>
 
             </div>
@@ -527,141 +324,992 @@
         </section>
 
 
-        <!-- CONTACT SECTION -->
-        <section class="contact section-wrap section-space" id="contact">
+        <!-- =================================
+             ABOUT SECTION
+        ================================== -->
+        <section class="about section-padding" id="about">
 
-            <div class="contact-grid">
+            <div class="section-container">
 
-                <div class="contact-copy reveal">
+                <div class="section-heading reveal">
 
-                    <p class="section-label">05 / GET IN TOUCH</p>
+                    <span class="section-label">
+                        01 / ABOUT ME
+                    </span>
 
                     <h2>
-                        Have an idea?<br>
-                        <span class="gradient-text">Let's build it.</span>
+                        More than a developer.
+                        <span class="orange-text">
+                            A digital problem solver.
+                        </span>
                     </h2>
 
                     <p>
-                        Tell me a little about what you're working on.
-                        I'll get back to you to discuss the next step.
+                        Combining technical skills with creative thinking
+                        to build meaningful digital experiences.
                     </p>
-
-
-                    <a
-                        class="contact-method"
-                        href="mailto:hammadkhalidm90@gmail.com"
-                    >
-
-                        <span class="method-icon">✉</span>
-
-                        <span>
-                            <small>EMAIL ME</small>
-                            <strong>hammadkhalidm90@gmail.com</strong>
-                        </span>
-
-                        <b>↗</b>
-
-                    </a>
-
-
-                    <a
-                        class="contact-method"
-                        href="https://wa.me/923301216575"
-                        target="_blank"
-                        rel="noopener"
-                    >
-
-                        <span class="method-icon">◉</span>
-
-                        <span>
-                            <small>WHATSAPP</small>
-                            <strong>+92 330 1216575</strong>
-                        </span>
-
-                        <b>↗</b>
-
-                    </a>
 
                 </div>
 
 
-                <!-- CONTACT FORM -->
-                <form class="contact-form reveal" id="contactForm">
+                <div class="about-grid">
 
-                    <div class="form-top">
-                        <span>START A CONVERSATION</span>
-                        <span class="form-index">HK / 2026</span>
+                    <!-- ABOUT IMAGE -->
+                    <div class="about-left reveal">
+
+                        <div class="about-image-wrapper">
+
+                            <div class="about-image-glow"></div>
+
+                            <img
+                                src="images/hammad-avatar.jpeg"
+                                alt="Hammad Khalid 3D professional avatar"
+                                class="about-image"
+                                loading="lazy"
+                            >
+
+                            <div class="about-image-tag">
+                                <span>HK.</span>
+                                <p>
+                                    CREATIVE MIND<br>
+                                    TECHNICAL SKILLS
+                                </p>
+                            </div>
+
+                        </div>
+
                     </div>
 
-                    <label for="from_name">Your name</label>
 
-                    <input
-                        id="from_name"
-                        name="from_name"
-                        type="text"
-                        placeholder="e.g. Alex Morgan"
-                        required
-                    >
+                    <!-- ABOUT TEXT -->
+                    <div class="about-right reveal">
 
-                    <label for="reply_to">Your email</label>
+                        <span class="about-subtitle">
+                            WHO I AM
+                        </span>
 
-                    <input
-                        id="reply_to"
-                        name="reply_to"
-                        type="email"
-                        placeholder="you@example.com"
-                        required
-                    >
+                        <h3>
+                            Turning ideas into
+                            <span class="orange-text">
+                                digital reality.
+                            </span>
+                        </h3>
 
-                    <label for="subject">What do you need?</label>
+                        <p>
+                            I'm Hammad Khalid, a web developer with
+                            over 4 years of experience creating
+                            professional websites that combine
+                            functionality, performance and modern design.
+                        </p>
 
-                    <input
-                        id="subject"
-                        name="subject"
-                        type="text"
-                        placeholder="Website, landing page, custom feature..."
-                        required
-                    >
+                        <p>
+                            I specialize in WordPress development,
+                            custom website redesign, eCommerce,
+                            website maintenance and technical fixes.
+                        </p>
 
-                    <label for="message">A little about your project</label>
+                        <p>
+                            My goal is to help businesses create
+                            a stronger online presence through
+                            reliable and effective web solutions.
+                        </p>
 
-                    <textarea
-                        id="message"
-                        name="message"
-                        rows="4"
-                        placeholder="Share your idea, goals and timeline..."
-                        required
-                    ></textarea>
 
-                    <button
-                        class="button button-primary submit-button"
-                        type="submit"
-                    >
-                        <span class="submit-label">Send message</span>
-                        <span>↗</span>
-                    </button>
+                        <div class="about-details">
 
-                    <p
-                        class="form-status"
-                        id="formStatus"
-                        role="status"
-                        aria-live="polite"
-                    >
-                        EmailJS setup required before messages can be sent.
-                    </p>
+                            <div class="detail-item">
+                                <span>FULL NAME</span>
+                                <strong>Hammad Khalid</strong>
+                            </div>
 
-                    <p class="form-fallback">
-                        Prefer WhatsApp?
-                        <a
-                            href="https://wa.me/923301216575"
-                            target="_blank"
-                            rel="noopener"
-                        >
-                            Message me directly ↗
+                            <div class="detail-item">
+                                <span>EXPERIENCE</span>
+                                <strong>4+ Years</strong>
+                            </div>
+
+                            <div class="detail-item">
+                                <span>SPECIALIZATION</span>
+                                <strong>Web Development</strong>
+                            </div>
+
+                            <div class="detail-item">
+                                <span>AVAILABILITY</span>
+                                <strong class="orange-text">
+                                    Open to Work
+                                </strong>
+                            </div>
+
+                        </div>
+
+                        <a href="#contact" class="text-link">
+                            Let's Work Together
+                            <i class="fas fa-arrow-right"></i>
                         </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             SERVICES SECTION
+        ================================== -->
+        <section class="services section-padding" id="services">
+
+            <div class="section-container">
+
+                <div class="section-heading reveal">
+
+                    <span class="section-label">
+                        02 / WHAT I DO
+                    </span>
+
+                    <h2>
+                        Services designed for
+                        <span class="orange-text">
+                            your success.
+                        </span>
+                    </h2>
+
+                    <p>
+                        Complete web solutions to take your business
+                        to the next level.
                     </p>
 
-                </form>
+                </div>
+
+
+                <div class="services-grid">
+
+                    <article class="service-card reveal">
+                        <span class="service-number">01</span>
+
+                        <div class="service-icon">
+                            <i class="fab fa-wordpress"></i>
+                        </div>
+
+                        <h3>WordPress Development</h3>
+
+                        <p>
+                            Custom WordPress websites with modern
+                            layouts, responsive design and easy
+                            content management.
+                        </p>
+
+                        <a href="#contact" class="service-arrow"
+                           aria-label="Ask about WordPress development">
+                            <i class="fas fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </article>
+
+
+                    <article class="service-card reveal">
+                        <span class="service-number">02</span>
+
+                        <div class="service-icon">
+                            <i class="fas fa-cart-shopping"></i>
+                        </div>
+
+                        <h3>eCommerce Development</h3>
+
+                        <p>
+                            Professional online stores designed
+                            to provide smooth shopping experiences
+                            and support business growth.
+                        </p>
+
+                        <a href="#contact" class="service-arrow"
+                           aria-label="Ask about eCommerce development">
+                            <i class="fas fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </article>
+
+
+                    <article class="service-card reveal">
+                        <span class="service-number">03</span>
+
+                        <div class="service-icon">
+                            <i class="fas fa-wand-magic-sparkles"></i>
+                        </div>
+
+                        <h3>Website Redesign</h3>
+
+                        <p>
+                            Transform outdated websites into
+                            modern, attractive and responsive
+                            digital experiences.
+                        </p>
+
+                        <a href="#contact" class="service-arrow"
+                           aria-label="Ask about website redesign">
+                            <i class="fas fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </article>
+
+
+                    <article class="service-card reveal">
+                        <span class="service-number">04</span>
+
+                        <div class="service-icon">
+                            <i class="fas fa-screwdriver-wrench"></i>
+                        </div>
+
+                        <h3>Bug Fixes & Maintenance</h3>
+
+                        <p>
+                            Website troubleshooting, technical
+                            error fixing, updates and ongoing
+                            maintenance.
+                        </p>
+
+                        <a href="#contact" class="service-arrow"
+                           aria-label="Ask about website maintenance">
+                            <i class="fas fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </article>
+
+
+                    <article class="service-card reveal">
+                        <span class="service-number">05</span>
+
+                        <div class="service-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+
+                        <h3>SEO Optimization</h3>
+
+                        <p>
+                            Website structure and on-page SEO
+                            improvements to support better
+                            search visibility.
+                        </p>
+
+                        <a href="#contact" class="service-arrow"
+                           aria-label="Ask about SEO">
+                            <i class="fas fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </article>
+
+
+                    <article class="service-card reveal">
+                        <span class="service-number">06</span>
+
+                        <div class="service-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+
+                        <h3>Custom Web Development</h3>
+
+                        <p>
+                            Tailored web solutions using HTML,
+                            CSS, JavaScript and other development
+                            technologies.
+                        </p>
+
+                        <a href="#contact" class="service-arrow"
+                           aria-label="Ask about custom development">
+                            <i class="fas fa-arrow-up-right-from-square"></i>
+                        </a>
+                    </article>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             SKILLS SECTION
+        ================================== -->
+        <section class="skills section-padding" id="skills">
+
+            <div class="section-container">
+
+                <div class="section-heading reveal">
+
+                    <span class="section-label">
+                        03 / MY EXPERTISE
+                    </span>
+
+                    <h2>
+                        Skills that bring
+                        <span class="orange-text">
+                            ideas to life.
+                        </span>
+                    </h2>
+
+                    <p>
+                        Technologies and tools I use to develop
+                        modern websites and digital solutions.
+                    </p>
+
+                </div>
+
+
+                <div class="skills-layout">
+
+                    <div class="skills-intro reveal">
+
+                        <h3>
+                            Technology meets creativity.
+                        </h3>
+
+                        <p>
+                            I combine practical development knowledge
+                            with a focus on usability, performance
+                            and clean design.
+                        </p>
+
+                        <div class="skills-highlight">
+                            <span>4+</span>
+                            <p>
+                                Years of practical web development
+                                experience
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="skills-list reveal">
+
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>WordPress</span>
+                                <span>98%</span>
+                            </div>
+                            <div class="skill-track">
+                                <div class="skill-fill" style="--skill-width:98%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>HTML & CSS</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-track">
+                                <div class="skill-fill" style="--skill-width:95%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>JavaScript</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-track">
+                                <div class="skill-fill" style="--skill-width:90%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>PHP</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-track">
+                                <div class="skill-fill" style="--skill-width:80%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>Python</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-track">
+                                <div class="skill-fill" style="--skill-width:80%"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-item">
+                            <div class="skill-info">
+                                <span>SEO Optimization</span>
+                                <span>95%</span>
+                            </div>
+                            <div class="skill-track">
+                                <div class="skill-fill" style="--skill-width:95%"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             EXPERIENCE SECTION
+        ================================== -->
+        <section class="experience section-padding" id="experience">
+
+            <div class="section-container">
+
+                <div class="section-heading reveal">
+
+                    <span class="section-label">
+                        04 / MY JOURNEY
+                    </span>
+
+                    <h2>
+                        Experience built through
+                        <span class="orange-text">
+                            real projects.
+                        </span>
+                    </h2>
+
+                    <p>
+                        Four years of learning, building and
+                        solving real website challenges.
+                    </p>
+
+                </div>
+
+
+                <div class="experience-timeline">
+
+                    <div class="timeline-item reveal">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-content">
+
+                            <span class="timeline-date">
+                                4+ YEARS EXPERIENCE
+                            </span>
+
+                            <h3>Web Development</h3>
+
+                            <h4>
+                                Professional Web Development
+                            </h4>
+
+                            <p>
+                                Developing WordPress websites,
+                                custom website redesigns, eCommerce
+                                solutions, technical fixes and
+                                website maintenance.
+                            </p>
+
+                            <div class="timeline-tags">
+                                <span>WordPress</span>
+                                <span>HTML</span>
+                                <span>CSS</span>
+                                <span>JavaScript</span>
+                                <span>PHP</span>
+                                <span>SEO</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             PROJECTS SECTION
+        ================================== -->
+        <section class="projects section-padding" id="projects">
+
+            <div class="section-container">
+
+                <div class="section-heading reveal">
+
+                    <span class="section-label">
+                        05 / SELECTED WORK
+                    </span>
+
+                    <h2>
+                        Projects that speak
+                        <span class="orange-text">
+                            for themselves.
+                        </span>
+                    </h2>
+
+                    <p>
+                        A selection of websites and digital
+                        experiences from my work.
+                    </p>
+
+                </div>
+
+
+                <div class="projects-grid">
+
+                    <!-- PROJECT 1 -->
+                    <article class="project-card reveal">
+
+                        <a
+                            href="https://larko-template.framer.website/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-image"
+                        >
+                            <img
+                                src="https://image.thum.io/get/width/1000/crop/650/https://larko-template.framer.website/"
+                                alt="Larko website project preview"
+                                loading="lazy"
+                            >
+
+                            <span class="project-view">
+                                <i class="fas fa-arrow-up-right-from-square"></i>
+                            </span>
+                        </a>
+
+                        <div class="project-info">
+                            <div>
+                                <span class="project-category">WEB DESIGN</span>
+                                <h3>Larko Template</h3>
+                            </div>
+
+                            <a href="https://larko-template.framer.website/"
+                               target="_blank" rel="noopener noreferrer"
+                               aria-label="Open Larko project">
+                                <i class="fas fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+
+                    </article>
+
+
+                    <!-- PROJECT 2 -->
+                    <article class="project-card reveal">
+
+                        <a
+                            href="https://v-shieldasia.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-image"
+                        >
+                            <img
+                                src="https://image.thum.io/get/width/1000/crop/650/https://v-shieldasia.com/"
+                                alt="V-Shield Asia website project preview"
+                                loading="lazy"
+                            >
+
+                            <span class="project-view">
+                                <i class="fas fa-arrow-up-right-from-square"></i>
+                            </span>
+                        </a>
+
+                        <div class="project-info">
+                            <div>
+                                <span class="project-category">BUSINESS WEBSITE</span>
+                                <h3>V-Shield Asia</h3>
+                            </div>
+
+                            <a href="https://v-shieldasia.com/"
+                               target="_blank" rel="noopener noreferrer"
+                               aria-label="Open V-Shield Asia project">
+                                <i class="fas fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+
+                    </article>
+
+
+                    <!-- PROJECT 3 -->
+                    <article class="project-card reveal">
+
+                        <a
+                            href="https://vectura.framer.website/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-image"
+                        >
+                            <img
+                                src="https://image.thum.io/get/width/1000/crop/650/https://vectura.framer.website/"
+                                alt="Vectura website project preview"
+                                loading="lazy"
+                            >
+
+                            <span class="project-view">
+                                <i class="fas fa-arrow-up-right-from-square"></i>
+                            </span>
+                        </a>
+
+                        <div class="project-info">
+                            <div>
+                                <span class="project-category">CREATIVE WEBSITE</span>
+                                <h3>Vectura</h3>
+                            </div>
+
+                            <a href="https://vectura.framer.website/"
+                               target="_blank" rel="noopener noreferrer"
+                               aria-label="Open Vectura project">
+                                <i class="fas fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+
+                    </article>
+
+
+                    <!-- PROJECT 4 -->
+                    <article class="project-card reveal">
+
+                        <a
+                            href="https://kosmimata.sg/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="project-image"
+                        >
+                            <img
+                                src="https://image.thum.io/get/width/1000/crop/650/https://kosmimata.sg/"
+                                alt="Kosmimata website project preview"
+                                loading="lazy"
+                            >
+
+                            <span class="project-view">
+                                <i class="fas fa-arrow-up-right-from-square"></i>
+                            </span>
+                        </a>
+
+                        <div class="project-info">
+                            <div>
+                                <span class="project-category">ECOMMERCE</span>
+                                <h3>Kosmimata</h3>
+                            </div>
+
+                            <a href="https://kosmimata.sg/"
+                               target="_blank" rel="noopener noreferrer"
+                               aria-label="Open Kosmimata project">
+                                <i class="fas fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <div class="projects-footer reveal">
+                    <p>Have a project in mind?</p>
+
+                    <a href="#contact" class="text-link">
+                        Let's create something together
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             WHY CHOOSE ME
+        ================================== -->
+        <section class="why-me section-padding">
+
+            <div class="section-container">
+
+                <div class="why-me-content reveal">
+
+                    <span class="section-label">
+                        WHY WORK WITH ME
+                    </span>
+
+                    <h2>
+                        Your vision deserves
+                        <span class="orange-text">
+                            more than ordinary.
+                        </span>
+                    </h2>
+
+                    <p>
+                        I focus on understanding your business goals
+                        and turning them into practical digital
+                        solutions. Every project receives attention
+                        to detail and a focus on quality.
+                    </p>
+
+
+                    <div class="why-points">
+
+                        <div class="why-point">
+                            <i class="fas fa-check"></i>
+                            <span>Responsive and user-friendly websites</span>
+                        </div>
+
+                        <div class="why-point">
+                            <i class="fas fa-check"></i>
+                            <span>Clean and maintainable code</span>
+                        </div>
+
+                        <div class="why-point">
+                            <i class="fas fa-check"></i>
+                            <span>Performance-focused development</span>
+                        </div>
+
+                        <div class="why-point">
+                            <i class="fas fa-check"></i>
+                            <span>Reliable project communication</span>
+                        </div>
+
+                    </div>
+
+                    <a href="#contact" class="btn-primary">
+                        Start a Project
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             CONTACT SECTION
+        ================================== -->
+        <section class="contact section-padding" id="contact">
+
+            <div class="section-container">
+
+                <div class="section-heading reveal">
+
+                    <span class="section-label">
+                        06 / GET IN TOUCH
+                    </span>
+
+                    <h2>
+                        Let's build something
+                        <span class="orange-text">
+                            meaningful.
+                        </span>
+                    </h2>
+
+                    <p>
+                        Have a project, a business idea or a website
+                        that needs improvement? Let's talk.
+                    </p>
+
+                </div>
+
+
+                <div class="contact-grid">
+
+                    <!-- CONTACT DETAILS -->
+                    <div class="contact-info reveal">
+
+                        <h3>Let's start a conversation.</h3>
+
+                        <p>
+                            Tell me what you're working on.
+                            Let's discuss how I can help you
+                            achieve your goals.
+                        </p>
+
+
+                        <div class="contact-detail">
+
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+
+                            <div>
+                                <span>EMAIL ME</span>
+
+                                <a href="mailto:hammadkhalidhk15@gmail.com">
+                                    hammadkhalidhk15@gmail.com
+                                </a>
+                            </div>
+
+                        </div>
+
+
+                        <div class="contact-detail">
+
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+
+                            <div>
+                                <span>CALL / WHATSAPP</span>
+
+                                <a href="https://wa.me/9233301216575"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    +92 333 01216575
+                                </a>
+                            </div>
+
+                        </div>
+
+
+                        <div class="contact-detail">
+
+                            <div class="contact-icon">
+                                <i class="fas fa-location-dot"></i>
+                            </div>
+
+                            <div>
+                                <span>LOCATION</span>
+                                <p>Pakistan · Available Worldwide</p>
+                            </div>
+
+                        </div>
+
+
+                        <div class="contact-socials">
+
+                            <a href="mailto:hammadkhalidhk15@gmail.com"
+                               aria-label="Email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+
+                            <a href="https://wa.me/9233301216575"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               aria-label="WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- CONTACT FORM -->
+                    <div class="contact-form-wrapper reveal">
+
+                        <form
+                            class="contact-form"
+                            action="https://formspree.io/f/YOUR_FORM_ID"
+                            method="POST"
+                        >
+
+                            <div class="form-row">
+
+                                <div class="form-group">
+                                    <label for="name">YOUR NAME</label>
+
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        placeholder="Your full name"
+                                        autocomplete="name"
+                                        required
+                                    >
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="email">EMAIL ADDRESS</label>
+
+                                    <input
+                                        type="email"
+                                        id="email"
+                                        name="email"
+                                        placeholder="your@email.com"
+                                        autocomplete="email"
+                                        required
+                                    >
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="subject">PROJECT SUBJECT</label>
+
+                                <input
+                                    type="text"
+                                    id="subject"
+                                    name="subject"
+                                    placeholder="Website Development"
+                                    required
+                                >
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="budget">PROJECT BUDGET</label>
+
+                                <select id="budget" name="budget">
+                                    <option value="">Select your budget</option>
+                                    <option value="Under $100">Under $100</option>
+                                    <option value="$100 - $300">$100 - $300</option>
+                                    <option value="$300 - $500">$300 - $500</option>
+                                    <option value="$500 - $1000">$500 - $1000</option>
+                                    <option value="$1000+">$1000+</option>
+                                    <option value="Not decided">Not decided</option>
+                                </select>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="message">
+                                    TELL ME ABOUT YOUR PROJECT
+                                </label>
+
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    rows="5"
+                                    placeholder="Write your project details..."
+                                    required
+                                ></textarea>
+                            </div>
+
+
+                            <button type="submit" class="btn-primary submit-btn">
+                                Send Message
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+
+                            <p class="form-note">
+                                Your information will only be used
+                                to respond to your inquiry.
+                            </p>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             FINAL CALL TO ACTION
+        ================================== -->
+        <section class="final-cta">
+
+            <div class="section-container reveal">
+
+                <span>HAVE A PROJECT IN MIND?</span>
+
+                <h2>
+                    Let's make your
+                    <span class="orange-text">
+                        next idea happen.
+                    </span>
+                </h2>
+
+                <a href="mailto:hammadkhalidhk15@gmail.com" class="btn-primary">
+                    Get In Touch
+                    <i class="fas fa-arrow-right"></i>
+                </a>
 
             </div>
 
@@ -670,34 +1318,90 @@
     </main>
 
 
-    <!-- FOOTER -->
-    <footer class="site-footer section-wrap">
+    <!-- =================================
+         FOOTER
+    ================================== -->
+    <footer class="main-footer">
 
-        <a class="brand" href="#home">
-            <span class="brand-mark">HK</span>
-            <span>hammad<span class="brand-dot">.</span></span>
-        </a>
+        <div class="section-container">
 
-        <p>Designed with intention. Built with code.</p>
+            <div class="footer-top">
 
-        <div>
-            <span>© <span id="year"></span> HAMMAD KHALID</span>
-            <a href="#home">BACK TO TOP ↑</a>
+                <div class="footer-brand">
+
+                    <a href="#home" class="logo">
+                        HK<span>.</span>
+                    </a>
+
+                    <p>
+                        Building digital experiences with creativity,
+                        purpose and technology.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links">
+
+                    <h4>QUICK LINKS</h4>
+
+                    <a href="#home">Home</a>
+                    <a href="#about">About</a>
+                    <a href="#services">Services</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#contact">Contact</a>
+
+                </div>
+
+
+                <div class="footer-contact">
+
+                    <h4>GET IN TOUCH</h4>
+
+                    <a href="mailto:hammadkhalidhk15@gmail.com">
+                        hammadkhalidhk15@gmail.com
+                    </a>
+
+                    <a href="https://wa.me/9233301216575"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        +92 333 01216575
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <p>
+                    © <span id="current-year">2026</span>
+                    Hammad Khalid. All rights reserved.
+                </p>
+
+                <p>
+                    DESIGNED & DEVELOPED WITH
+                    <span class="orange-text">PASSION.</span>
+                </p>
+
+                <a href="#home" class="footer-back-top">
+                    BACK TO TOP
+                    <i class="fas fa-arrow-up"></i>
+                </a>
+
+            </div>
+
         </div>
 
     </footer>
 
 
-    <!-- FLOATING WHATSAPP -->
-    <a
-        class="whatsapp-float"
-        href="https://wa.me/923301216575"
-        target="_blank"
-        rel="noopener"
-        aria-label="Chat on WhatsApp"
-    >
-        ◉
-    </a>
+    <!-- BACK TO TOP -->
+    <button class="floating-top" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
 </body>
 </html>
